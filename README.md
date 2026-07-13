@@ -11,21 +11,21 @@ npm run build     # type-checks + outputs static site to dist/
 npm run preview   # preview the production build
 ```
 
-## Replace the placeholder images
+## Replacing images
 
-The attached logo and photos could not be extracted into this project automatically, so every image slot below currently holds a generated placeholder graphic. Replace each file (keep the same filename, or update the reference) with the real asset:
+| File | Used for | Status |
+| --- | --- | --- |
+| `public/images/logo.png` | Header & footer wordmark | Real asset |
+| `public/images/mark.png` | Favicon | Real asset |
+| `public/images/og-default.jpeg` | Default social share image | Real asset |
+| `public/images/press/hero-portrait.png` | Homepage hero photo | Real asset |
+| `public/images/press/press-photo-1.jpeg` | About page photo | Real asset |
+| `public/images/press/press-photo-2.svg` | Spare press photo (not yet used) | Placeholder |
+| `public/images/releases/*.svg` | Cover art per release (filenames match each release's slug) | Placeholder |
 
-| File | Used for |
-| --- | --- |
-| `public/images/logo.svg` | Header & footer wordmark |
-| `public/images/mark.svg` | Favicon |
-| `public/images/og-default.svg` | Default social share image |
-| `public/images/press/hero-portrait.svg` | Homepage hero photo |
-| `public/images/press/press-photo-1.svg` | About page photo |
-| `public/images/press/press-photo-2.svg` | Spare press photo (not yet used) |
-| `public/images/releases/*.svg` | Cover art per release (filenames match each release's slug) |
+The logo and favicon source files were supplied as large square canvases with a lot of transparent padding around the actual mark, so they were auto-cropped to their visible content (`logo.png` to 1600×448, `mark.png` to a tight 512×512) before being wired in — otherwise the wordmark would have rendered tiny inside the header's fixed height.
 
-Photos can be `.jpg`/`.png`/`.webp` — just update the `src` in `src/pages/index.astro`, `src/pages/about.astro`, and each `src/content/releases/*.json` file's `cover` field accordingly.
+To replace any remaining placeholder, upload the new file into the same folder (any name/format works — `.jpg`/`.png`/`.webp`) and update the one reference to it: the `src` in `src/pages/index.astro` / `src/pages/about.astro`, or the `cover` field in the relevant `src/content/releases/*.json` file.
 
 Release cover art is already rendered as the **full background of each release tile** (`src/components/ReleaseCard.astro`), with a dark gradient overlay so the title/label text on top stays readable. Once you drop a real cover into `cover` on a release's JSON file, it's automatically used as that tile's background everywhere (home, `/releases/`, and the "More Releases" section on each release page) — no other changes needed.
 

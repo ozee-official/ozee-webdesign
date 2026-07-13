@@ -16,7 +16,7 @@ interface Props {
 const {
   title,
   description,
-  image = '/images/og-default.svg',
+  image = '/images/og-default.jpeg',
   imageAlt = 'Ozee — Progressive House & Festival EDM Producer',
   type = 'website',
   jsonLd,
@@ -39,8 +39,8 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
     <link rel="canonical" href={canonicalURL} />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-    <link rel="icon" type="image/svg+xml" href="/images/mark.svg" />
-    <link rel="apple-touch-icon" href="/images/mark.svg" />
+    <link rel="icon" type="image/png" href="/images/mark.png" />
+    <link rel="apple-touch-icon" href="/images/mark.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={type === 'music.song' ? 'music.song' : type === 'profile' ? 'profile' : 'website'} />
