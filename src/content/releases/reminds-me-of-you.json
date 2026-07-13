@@ -2,12 +2,13 @@
   "title": "Reminds Me Of You",
   "slug": "reminds-me-of-you",
   "year": 2025,
+  "order": 15,
   "label": "FeelQ Recordings",
   "type": "original",
   "tagline": "Ozee joins FeelQ Recordings, 2025",
   "description": "Reminds Me Of You marks Ozee's first release on FeelQ Recordings, a nostalgic, melody-driven progressive house track that reflects his continued evolution as a producer in 2025.",
   "cover": "/images/releases/reminds-me-of-you.svg",
   "coverAlt": "Ozee - Reminds Me Of You cover artwork, 2025 release on FeelQ Recordings",
-  "accent": "#f3ef3d",
+  "accent": "#c084fc",
   "featured": true
 }

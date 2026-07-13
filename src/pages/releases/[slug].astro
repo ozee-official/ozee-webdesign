@@ -23,7 +23,7 @@ const typeLabel =
 
 const more = allReleases
   .filter((r) => r.data.slug !== release.data.slug)
-  .sort((a, b) => b.data.year - a.data.year)
+  .sort((a, b) => b.data.order - a.data.order)
   .slice(0, 3);
 
 const jsonLd = {

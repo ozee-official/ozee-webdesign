@@ -1,0 +1,14 @@
+{
+  "title": "Crazy",
+  "slug": "crazy",
+  "year": 2023,
+  "order": 6,
+  "label": "Hit Music Group",
+  "type": "original",
+  "tagline": "Progressive house on Hit Music Group, 2023",
+  "description": "Crazy, released via Hit Music Group in 2023, brings driving energy and melodic hooks in classic Ozee fashion.",
+  "cover": "/images/releases/crazy.svg",
+  "coverAlt": "Ozee - Crazy cover artwork, 2023 release on Hit Music Group",
+  "accent": "#ff6f91",
+  "featured": true
+}

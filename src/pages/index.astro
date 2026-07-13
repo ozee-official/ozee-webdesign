@@ -6,7 +6,7 @@ import ReleaseCard from '../components/ReleaseCard.astro';
 const SPOTIFY_URL =
   'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
 
-const releases = (await getCollection('releases')).sort((a, b) => b.data.year - a.data.year);
+const releases = (await getCollection('releases')).sort((a, b) => b.data.order - a.data.order);
 const latest = releases[0];
 const featured = releases.slice(0, 6);
 
@@ -18,13 +18,13 @@ const jsonLd = {
   url: new URL(Astro.url.pathname, Astro.site).toString(),
   sameAs: [SPOTIFY_URL],
   description:
-    'Ozee is an electronic music producer from Germany creating progressive house and festival EDM, with releases on Glow Records, Soulz Music Group, Ensis Records, Future House Cloud and FeelQ Recordings.',
+    'Ozee is an electronic music producer from Germany creating progressive house and festival EDM, with releases on labels including Interplay Records, Stardust Records, FeelQ Recordings and more.',
 };
 ---
 
 <Layout
   title="Ozee — Progressive House & Festival EDM Producer"
-  description="Official website of Ozee, a German progressive house and festival EDM producer. Listen to his releases including Magnets, Embrace The Night and Reminds Me Of You."
+  description="Official website of Ozee, a German progressive house and festival EDM producer. Listen to his releases including Hope (Places A Journey), Embrace The Night and Reminds Me Of You."
   image="/images/og-default.svg"
   type="website"
   jsonLd={jsonLd}
@@ -38,15 +38,13 @@ const jsonLd = {
     </div>
     <div class="mx-auto max-w-6xl px-6 grid gap-12 md:grid-cols-2 items-center">
       <div>
-        <p class="reveal text-sm uppercase tracking-[0.3em] text-brand-soft/80 mb-4">
-          Progressive House &middot; Festival EDM
-        </p>
         <h1 class="reveal text-5xl md:text-7xl font-black italic tracking-tight leading-[0.95] mb-6">
           OZEE
         </h1>
         <p class="reveal text-lg text-white/70 max-w-md mb-8 text-balance">
-          German electronic music producer crafting melodic, high-energy progressive house and
-          festival EDM &mdash; shaping his sound since 2018.
+          German electronic music producer crafting melodic progressive house music. Since 2018,
+          I&rsquo;ve been shaping my sound with emotional melodies, powerful energy, and a passion
+          for creating unforgettable moments.
         </p>
         <div class="reveal flex flex-wrap gap-4">
           <a
@@ -78,28 +76,6 @@ const jsonLd = {
             class="h-full w-full object-cover"
           />
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quick facts -->
-  <section class="border-y border-white/10 bg-white/[0.02]">
-    <div class="mx-auto max-w-6xl px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div class="reveal">
-        <p class="text-3xl font-bold">2018</p>
-        <p class="text-sm text-white/50 mt-1">Producing since</p>
-      </div>
-      <div class="reveal">
-        <p class="text-3xl font-bold">{releases.length}</p>
-        <p class="text-sm text-white/50 mt-1">Official releases</p>
-      </div>
-      <div class="reveal">
-        <p class="text-3xl font-bold">5</p>
-        <p class="text-sm text-white/50 mt-1">Record labels</p>
-      </div>
-      <div class="reveal">
-        <p class="text-3xl font-bold">2025</p>
-        <p class="text-sm text-white/50 mt-1">First official remix</p>
       </div>
     </div>
   </section>
@@ -174,7 +150,7 @@ const jsonLd = {
     <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">About Ozee</p>
     <p class="reveal text-xl md:text-2xl text-white/80 leading-relaxed text-balance mb-8">
       What started as pure curiosity in 2018 grew into a passion for crafting music that blends
-      influences from across dance music &mdash; powerful, emotional and unmistakably his own.
+      influences from various dance music genres: powerful, emotional and yet festival-ready.
     </p>
     <a
       href="/about/"

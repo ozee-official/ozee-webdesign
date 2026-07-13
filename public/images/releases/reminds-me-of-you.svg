@@ -2,11 +2,11 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0a0a0c"/>
-      <stop offset="1" stop-color="#f3ef3d2e"/>
+      <stop offset="1" stop-color="#c084fc2e"/>
     </linearGradient>
     <radialGradient id="glow" cx="50%" cy="30%" r="65%">
-      <stop offset="0" stop-color="#f3ef3d" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#f3ef3d" stop-opacity="0"/>
+      <stop offset="0" stop-color="#c084fc" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c084fc" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glowBrand" cx="85%" cy="90%" r="45%">
       <stop offset="0" stop-color="#f3ef3d" stop-opacity="0.28"/>
@@ -16,7 +16,7 @@
   <rect width="1000" height="1000" fill="url(#bg)"/>
   <rect width="1000" height="1000" fill="url(#glow)"/>
   <rect width="1000" height="1000" fill="url(#glowBrand)"/>
-  <g opacity="0.45" stroke="#f3ef3d" stroke-width="2">
+  <g opacity="0.45" stroke="#c084fc" stroke-width="2">
     <path d="M-50 640 L1050 560"/>
     <path d="M-50 700 L1050 620"/>
   </g>

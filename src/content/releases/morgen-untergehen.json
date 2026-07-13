@@ -2,6 +2,7 @@
   "title": "Morgen Untergehen (Ozee Remix)",
   "slug": "morgen-untergehen",
   "year": 2025,
+  "order": 14,
   "label": "Official Remix",
   "type": "remix",
   "with": "Ann-Cathrin",
@@ -9,6 +10,6 @@
   "description": "In 2025, Ozee delivered his first official remix, reworking German singer-songwriter Ann-Cathrin's Morgen Untergehen into a progressive house production that carries the original's emotional weight onto the dancefloor.",
   "cover": "/images/releases/morgen-untergehen.svg",
   "coverAlt": "Ozee - Morgen Untergehen (Ozee Remix) cover artwork, 2025 official remix for Ann-Cathrin",
-  "accent": "#ff7a45",
+  "accent": "#f3ef3d",
   "featured": true
 }

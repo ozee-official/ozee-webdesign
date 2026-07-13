@@ -2,12 +2,13 @@
   "title": "I'm Broken",
   "slug": "im-broken",
   "year": 2024,
+  "order": 11,
   "label": "Future House Cloud",
   "type": "original",
   "tagline": "Raw emotion meets festival house, 2024",
   "description": "The second of Ozee's 2024 standouts, I'm Broken arrived via Future House Cloud, channeling raw emotion into a powerful festival house anthem that showcases the more vulnerable side of his sound.",
   "cover": "/images/releases/im-broken.svg",
   "coverAlt": "Ozee - I'm Broken cover artwork, 2024 release on Future House Cloud",
-  "accent": "#ffc93d",
+  "accent": "#ff5da2",
   "featured": true
 }

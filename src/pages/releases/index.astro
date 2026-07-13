@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ReleaseCard from '../../components/ReleaseCard.astro';
 
-const releases = (await getCollection('releases')).sort((a, b) => b.data.year - a.data.year);
+const releases = (await getCollection('releases')).sort((a, b) => b.data.order - a.data.order);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -20,7 +20,7 @@ const jsonLd = {
 
 <Layout
   title="Releases — Discography"
-  description="Browse the full discography of Ozee, a German progressive house and festival EDM producer, including Magnets, Not What I Need, Embrace The Night, I'm Broken, Morgen Untergehen and Reminds Me Of You."
+  description="Browse the full discography of Ozee, a German progressive house and festival EDM producer, including Hope (Places A Journey), Embrace The Night, I'm Broken, Morgen Untergehen and Reminds Me Of You."
   jsonLd={jsonLd}
 >
   <section class="pt-40 pb-16 mx-auto max-w-6xl px-6">

@@ -7,6 +7,7 @@ const releases = defineCollection({
     title: z.string(),
     slug: z.string(),
     year: z.number(),
+    order: z.number(),
     label: z.string(),
     type: z.enum(['original', 'collaboration', 'remix']),
     with: z.string().optional(),
