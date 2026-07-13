@@ -1,14 +1,14 @@
 {
-  "title": "Déjà-vu",
+  "title": "D\u00e9j\u00e0-vu",
   "slug": "deja-vu",
   "year": 2025,
-  "order": 22,
+  "order": 23,
   "label": "Stardust Records",
   "type": "original",
   "tagline": "Progressive house on Stardust Records, 2025",
-  "description": "Déjà-vu, released via Stardust Records in 2025, layers nostalgic melodic motifs over a driving progressive house groove.",
+  "description": "D\u00e9j\u00e0-vu, released via Stardust Records in 2025, layers nostalgic melodic motifs over a driving progressive house groove.",
   "cover": "/images/releases/deja-vu.svg",
-  "coverAlt": "Ozee - Déjà-vu cover artwork, 2025 release on Stardust Records",
+  "coverAlt": "Ozee - D\u00e9j\u00e0-vu cover artwork, 2025 release on Stardust Records",
   "accent": "#ff7a45",
   "featured": true
 }
