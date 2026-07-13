@@ -2,21 +2,25 @@
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0a0a0c"/>
-      <stop offset="1" stop-color="#ff5da222"/>
+      <stop offset="1" stop-color="#ff5da22e"/>
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="35%" r="60%">
+    <radialGradient id="glow" cx="50%" cy="30%" r="65%">
       <stop offset="0" stop-color="#ff5da2" stop-opacity="0.55"/>
       <stop offset="1" stop-color="#ff5da2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBrand" cx="85%" cy="90%" r="45%">
+      <stop offset="0" stop-color="#f3ef3d" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#f3ef3d" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="1000" height="1000" fill="url(#bg)"/>
   <rect width="1000" height="1000" fill="url(#glow)"/>
-  <g opacity="0.5" stroke="#ff5da2" stroke-width="2">
-    <path d="M0 700 L1000 620"/>
-    <path d="M0 760 L1000 680"/>
+  <rect width="1000" height="1000" fill="url(#glowBrand)"/>
+  <g opacity="0.45" stroke="#ff5da2" stroke-width="2">
+    <path d="M-50 640 L1050 560"/>
+    <path d="M-50 700 L1050 620"/>
   </g>
-  <text x="500" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-style="italic" font-size="70" letter-spacing="4" fill="#ffffff">OZEE</text>
-  <text x="500" y="477" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="40" letter-spacing="2" fill="#ffffff">NOT WHAT I</text>
-  <text x="500" y="523" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="40" letter-spacing="2" fill="#ffffff">NEED</text>
-  <text x="500" y="920" text-anchor="middle" font-family="Arial, sans-serif" font-weight="400" font-size="22" letter-spacing="6" fill="#ffffff" opacity="0.55">COVER ART PLACEHOLDER</text>
+  <line x1="80" y1="80" x2="220" y2="80" stroke="#f3ef3d" stroke-width="4" opacity="0.85"/>
+  <text x="80" y="140" font-family="Arial, sans-serif" font-weight="900" font-style="italic" font-size="52" letter-spacing="2" fill="#ffffff">OZEE</text>
+  <text x="80" y="935" font-family="Arial, sans-serif" font-weight="400" font-size="20" letter-spacing="4" fill="#ffffff" opacity="0.45">COVER ART PLACEHOLDER</text>
 </svg>

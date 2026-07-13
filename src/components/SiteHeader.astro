@@ -28,12 +28,12 @@ const currentPath = Astro.url.pathname;
               href={item.href}
               aria-current={isActive ? 'page' : undefined}
               class:list={[
-                'relative py-2 text-white/70 transition-colors hover:text-white',
+                'relative py-2 text-white/70 transition-colors hover:text-brand-soft',
                 { 'text-white': isActive },
               ]}
             >
               {item.label}
-              {isActive && <span class="absolute -bottom-px left-0 right-0 h-px bg-white" />}
+              {isActive && <span class="absolute -bottom-px left-0 right-0 h-px bg-brand" />}
             </a>
           );
         })
@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname;
       href={SPOTIFY_URL}
       target="_blank"
       rel="noopener noreferrer"
-      class="hidden md:inline-flex items-center gap-2 rounded-full bg-white text-ink text-sm font-semibold px-4 py-2 transition-transform hover:scale-105"
+      class="btn-primary hidden md:inline-flex gap-2 text-sm px-4 py-2"
     >
       Listen on Spotify
     </a>
@@ -72,7 +72,7 @@ const currentPath = Astro.url.pathname;
       navItems.map((item) => (
         <a
           href={item.href}
-          class="py-3 text-white/80 text-base border-b border-white/5 last:border-0"
+          class="py-3 text-white/80 text-base border-b border-white/5 last:border-0 active:text-brand-soft"
         >
           {item.label}
         </a>
@@ -82,7 +82,7 @@ const currentPath = Astro.url.pathname;
       href={SPOTIFY_URL}
       target="_blank"
       rel="noopener noreferrer"
-      class="mt-4 inline-flex justify-center items-center rounded-full bg-white text-ink text-sm font-semibold px-4 py-3"
+      class="btn-primary mt-4 text-sm"
     >
       Listen on Spotify
     </a>

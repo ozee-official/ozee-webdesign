@@ -7,26 +7,26 @@ const CONTACT_EMAIL = 'ozeemusic.contact@gmail.com';
 ---
 
 <Layout
-  title="Contact & Booking"
-  description="Get in touch with Ozee for booking, collaborations, remixes and press inquiries."
+  title="Contact"
+  description="Get in touch with Ozee for collaborations, remixes and press inquiries."
 >
   <section class="relative overflow-hidden pt-40 pb-24 min-h-[70vh] flex items-center">
     <div
       class="pointer-events-none absolute inset-0 -z-10"
-      style="background: radial-gradient(50% 40% at 50% 20%, rgba(255,138,61,0.16), transparent 70%);"
+      style="background: radial-gradient(50% 40% at 50% 20%, rgba(243,239,61,0.14), transparent 70%);"
     >
     </div>
     <div class="mx-auto max-w-2xl px-6 text-center">
-      <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">Get In Touch</p>
-      <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">Contact &amp; Booking</h1>
+      <p class="reveal text-sm uppercase tracking-[0.3em] text-brand-soft/80 mb-4">Get In Touch</p>
+      <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">Contact</h1>
       <p class="reveal text-white/70 leading-relaxed mb-10">
-        For booking requests, collaborations, remixes or press inquiries, reach out directly by
-        email or connect on Spotify.
+        For collaborations, remixes or press inquiries, reach out directly by email or connect on
+        Spotify.
       </p>
       <div class="reveal flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href={`mailto:${CONTACT_EMAIL}`}
-          class="inline-flex items-center justify-center rounded-full bg-white text-ink font-semibold px-6 py-3 transition-transform hover:scale-105"
+          class="btn-primary"
         >
           {CONTACT_EMAIL}
         </a>
@@ -34,7 +34,7 @@ const CONTACT_EMAIL = 'ozeemusic.contact@gmail.com';
           href={SPOTIFY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center rounded-full border border-white/25 text-white font-semibold px-6 py-3 transition-colors hover:bg-white/10"
+          class="btn-outline"
         >
           Follow on Spotify
         </a>
