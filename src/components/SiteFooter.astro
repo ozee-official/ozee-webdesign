@@ -1,0 +1,55 @@
+---
+const SPOTIFY_URL =
+  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+const CONTACT_EMAIL = 'ozeemusic.contact@gmail.com';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/10 mt-24">
+  <div class="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-3">
+    <div>
+      <img src="/images/logo.svg" alt="Ozee logo" width="96" height="28" class="h-6 w-auto mb-4" />
+      <p class="text-white/60 text-sm max-w-xs">
+        Progressive house &amp; festival EDM producer from Germany, shaping melodic, high-energy
+        dance music since 2018.
+      </p>
+    </div>
+
+    <nav aria-label="Footer" class="text-sm">
+      <h2 class="text-white/40 uppercase tracking-widest text-xs mb-4">Explore</h2>
+      <ul class="space-y-2 text-white/70">
+        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+        <li><a href="/releases/" class="hover:text-white transition-colors">Releases</a></li>
+        <li><a href="/about/" class="hover:text-white transition-colors">About</a></li>
+        <li><a href="/contact/" class="hover:text-white transition-colors">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="text-sm">
+      <h2 class="text-white/40 uppercase tracking-widest text-xs mb-4">Connect</h2>
+      <ul class="space-y-2 text-white/70">
+        <li>
+          <a
+            href={SPOTIFY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-white transition-colors"
+          >
+            Spotify
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-white transition-colors">
+            {CONTACT_EMAIL}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <p class="mx-auto max-w-6xl px-6 py-6 text-xs text-white/40">
+      &copy; {year} Ozee. All rights reserved.
+    </p>
+  </div>
+</footer>

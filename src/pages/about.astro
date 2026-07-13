@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const timeline = [
+  { year: '2018', text: 'Starts producing electronic music out of pure curiosity.' },
+  { year: '2020', text: 'First breakthrough with recognition in the progressive house community.' },
+  { year: '2022', text: '"Magnets" — first major collaboration, released on Glow Records.' },
+  { year: '2023', text: '"Not What I Need" released on Soulz Music Group.' },
+  {
+    year: '2024',
+    text: '"Embrace The Night" (Ensis Records) and "I\'m Broken" (Future House Cloud) released.',
+  },
+  {
+    year: '2025',
+    text: 'First official remix, "Morgen Untergehen" for Ann-Cathrin, followed by "Reminds Me Of You" on FeelQ Recordings.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Ozee',
+    jobTitle: 'Electronic Music Producer',
+    nationality: 'German',
+    genre: ['Progressive House', 'Festival EDM'],
+  },
+};
+---
+
+<Layout
+  title="About Ozee"
+  description="Learn about Ozee, a German progressive house and festival EDM producer active since 2018, with releases on Glow Records, Soulz Music Group, Ensis Records, Future House Cloud and FeelQ Recordings."
+  image="/images/press/press-photo-1.svg"
+  imageAlt="Ozee, progressive house and festival EDM producer, press photo"
+  type="profile"
+  jsonLd={jsonLd}
+>
+  <section class="relative overflow-hidden pt-40 pb-20">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10"
+      style="background: radial-gradient(55% 45% at 50% 0%, rgba(124,92,255,0.18), transparent 70%);"
+    >
+    </div>
+    <div class="mx-auto max-w-6xl px-6 grid gap-12 md:grid-cols-2 items-center">
+      <div>
+        <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">About</p>
+        <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">The Story of Ozee</h1>
+        <p class="reveal text-white/70 leading-relaxed">
+          Ozee is an electronic music producer from Germany who began shaping his sound back in
+          2018.
+        </p>
+      </div>
+      <div class="reveal aspect-[4/5] rounded-3xl overflow-hidden border border-white/10">
+        <img
+          src="/images/press/press-photo-1.svg"
+          alt="Portrait of Ozee, German progressive house and festival EDM producer"
+          width="1200"
+          height="1500"
+          loading="eager"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16">
+    <h2 class="reveal text-2xl md:text-3xl font-bold mb-6">From Curiosity to Craft</h2>
+    <div class="reveal space-y-6 text-white/80 leading-relaxed text-lg">
+      <p>
+        What started as pure curiosity quickly grew into a passion, fueled by the influence of
+        artists like Martin Garrix, Alesso, Hardwell, and many more. From the beginning, Ozee set
+        out to create music that doesn't just follow a formula but combines different influences
+        from all kinds of music, resulting in tracks that are both powerful and unique.
+      </p>
+      <p>
+        His first breakthrough arrived in 2020 with first recognition in the progressive
+        community, opening the door to bigger stages. In 2022, he reached a milestone with his
+        first major collaboration, <a href="/releases/magnets/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">Magnets</a>,
+        signed to Glow Records. More successes followed: in 2023, <a href="/releases/not-what-i-need/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">Not What I Need</a> was
+        released on Soulz Music Group, while 2024 brought two standout tracks: <a href="/releases/embrace-the-night/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">Embrace The Night</a> on
+        Ensis Records and <a href="/releases/im-broken/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">I'm Broken</a> on
+        Future House Cloud.
+      </p>
+      <p>
+        2025 marked a defining year, as Ozee delivered his first official remix for German
+        singer-songwriter Ann-Cathrin with <a href="/releases/morgen-untergehen/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">Morgen Untergehen</a> and
+        joined FeelQ Recordings with <a href="/releases/reminds-me-of-you/" class="underline decoration-white/30 underline-offset-4 hover:decoration-white">Reminds Me Of You</a>.
+      </p>
+      <p>
+        With each track, Ozee continues to evolve, merging emotion, energy, and innovation into a
+        sound that reflects his journey and passion for electronic music.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-y border-white/10 bg-white/[0.02]">
+    <div class="mx-auto max-w-3xl px-6 py-16">
+      <h2 class="reveal text-2xl md:text-3xl font-bold mb-10">Timeline</h2>
+      <ol class="reveal relative border-l border-white/15 space-y-10 pl-8">
+        {
+          timeline.map((item) => (
+            <li>
+              <span class="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full bg-white" />
+              <p class="text-sm uppercase tracking-widest text-white/40 mb-1">{item.year}</p>
+              <p class="text-white/80 leading-relaxed">{item.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-16 text-center">
+    <h2 class="reveal text-2xl md:text-3xl font-bold mb-4">Sound &amp; Influences</h2>
+    <p class="reveal text-white/70 leading-relaxed mb-8">
+      Ozee's sound draws on the melodic, festival-ready progressive house pioneered by artists
+      like Martin Garrix, Alesso and Hardwell &mdash; reshaped through his own blend of emotion,
+      energy and genre-crossing influences.
+    </p>
+    <a
+      href="/releases/"
+      class="reveal inline-flex items-center rounded-full bg-white text-ink font-semibold px-6 py-3 transition-transform hover:scale-105"
+    >
+      Explore the Releases
+    </a>
+  </section>
+</Layout>

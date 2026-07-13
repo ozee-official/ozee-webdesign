@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+
+export async function getStaticPaths() {
+  const releases = await getCollection('releases');
+  return releases.map((release) => ({
+    params: { slug: release.data.slug },
+    props: { release, allReleases: releases },
+  }));
+}
+
+const { release, allReleases } = Astro.props;
+const { title, year, label, type, with: collaborator, description, cover, coverAlt, accent } =
+  release.data;
+
+const SPOTIFY_URL =
+  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+
+const typeLabel =
+  type === 'remix' ? 'Official Remix' : type === 'collaboration' ? 'Collaboration' : 'Original Release';
+
+const more = allReleases
+  .filter((r) => r.data.slug !== release.data.slug)
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 3);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicRecording',
+  name: title,
+  datePublished: String(year),
+  byArtist: {
+    '@type': 'MusicGroup',
+    name: 'Ozee',
+  },
+  ...(collaborator ? { contributor: { '@type': 'Person', name: collaborator } } : {}),
+  inAlbum: {
+    '@type': 'MusicRelease',
+    recordLabel: {
+      '@type': 'Organization',
+      name: label,
+    },
+  },
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+};
+---
+
+<Layout
+  title={`${title} (${year})`}
+  description={description}
+  image={cover}
+  imageAlt={coverAlt}
+  type="music.song"
+  jsonLd={jsonLd}
+>
+  <section class="relative overflow-hidden pt-40 pb-24">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10"
+      style={`background: radial-gradient(55% 45% at 50% 0%, ${accent}22, transparent 70%);`}
+    >
+    </div>
+    <div class="mx-auto max-w-5xl px-6">
+      <a href="/releases/" class="reveal inline-flex items-center text-sm text-white/60 hover:text-white transition-colors mb-8">
+        &larr; All releases
+      </a>
+      <div class="grid gap-10 md:grid-cols-2 items-center">
+        <div class="reveal aspect-square rounded-3xl overflow-hidden border border-white/10">
+          <img
+            src={cover}
+            alt={coverAlt}
+            width="1000"
+            height="1000"
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div class="reveal">
+          <span
+            class="inline-block rounded-full px-3 py-1 text-xs font-semibold mb-4"
+            style={`background:${accent}33; color:#fff; border:1px solid ${accent}66;`}
+          >
+            {typeLabel}
+          </span>
+          <h1 class="text-4xl md:text-5xl font-bold mb-3 text-balance">{title}</h1>
+          <p class="text-white/50 mb-6">
+            {label} &middot; {year}
+            {collaborator ? ` · with ${collaborator}` : ''}
+          </p>
+          <p class="text-white/80 leading-relaxed mb-8">{description}</p>
+          <a
+            href={SPOTIFY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-full bg-white text-ink font-semibold px-6 py-3 transition-transform hover:scale-105"
+          >
+            Listen on Spotify
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    more.length > 0 && (
+      <section class="mx-auto max-w-6xl px-6 pb-28">
+        <h2 class="reveal text-2xl md:text-3xl font-bold mb-8">More Releases</h2>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {more.map((r) => (
+            <ReleaseCard release={r} />
+          ))}
+        </div>
+      </section>
+    )
+  }
+</Layout>

@@ -1,0 +1,186 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ReleaseCard from '../components/ReleaseCard.astro';
+
+const SPOTIFY_URL =
+  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+
+const releases = (await getCollection('releases')).sort((a, b) => b.data.year - a.data.year);
+const latest = releases[0];
+const featured = releases.slice(0, 6);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: 'Ozee',
+  genre: ['Progressive House', 'Festival EDM'],
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  sameAs: [SPOTIFY_URL],
+  description:
+    'Ozee is an electronic music producer from Germany creating progressive house and festival EDM, with releases on Glow Records, Soulz Music Group, Ensis Records, Future House Cloud and FeelQ Recordings.',
+};
+---
+
+<Layout
+  title="Ozee — Progressive House & Festival EDM Producer"
+  description="Official website of Ozee, a German progressive house and festival EDM producer. Listen to his releases including Magnets, Embrace The Night and Reminds Me Of You."
+  image="/images/og-default.svg"
+  type="website"
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden pt-40 pb-24 md:pt-48 md:pb-32">
+    <div
+      class="pointer-events-none absolute inset-0 -z-10"
+      style="background: radial-gradient(60% 50% at 50% 0%, rgba(79,125,255,0.18), transparent 70%);"
+    >
+    </div>
+    <div class="mx-auto max-w-6xl px-6 grid gap-12 md:grid-cols-2 items-center">
+      <div>
+        <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">
+          Progressive House &middot; Festival EDM
+        </p>
+        <h1 class="reveal text-5xl md:text-7xl font-black italic tracking-tight leading-[0.95] mb-6">
+          OZEE
+        </h1>
+        <p class="reveal text-lg text-white/70 max-w-md mb-8 text-balance">
+          German electronic music producer crafting melodic, high-energy progressive house and
+          festival EDM &mdash; shaping his sound since 2018.
+        </p>
+        <div class="reveal flex flex-wrap gap-4">
+          <a
+            href={SPOTIFY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-full bg-white text-ink font-semibold px-6 py-3 transition-transform hover:scale-105"
+          >
+            Listen on Spotify
+          </a>
+          <a
+            href="/releases/"
+            class="inline-flex items-center rounded-full border border-white/25 text-white font-semibold px-6 py-3 transition-colors hover:bg-white/10"
+          >
+            Explore Releases
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10">
+          <img
+            src="/images/press/hero-portrait.svg"
+            alt="Portrait of Ozee, progressive house and festival EDM producer from Germany"
+            width="1200"
+            height="1500"
+            loading="eager"
+            fetchpriority="high"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick facts -->
+  <section class="border-y border-white/10 bg-white/[0.02]">
+    <div class="mx-auto max-w-6xl px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="reveal">
+        <p class="text-3xl font-bold">2018</p>
+        <p class="text-sm text-white/50 mt-1">Producing since</p>
+      </div>
+      <div class="reveal">
+        <p class="text-3xl font-bold">{releases.length}</p>
+        <p class="text-sm text-white/50 mt-1">Official releases</p>
+      </div>
+      <div class="reveal">
+        <p class="text-3xl font-bold">5</p>
+        <p class="text-sm text-white/50 mt-1">Record labels</p>
+      </div>
+      <div class="reveal">
+        <p class="text-3xl font-bold">2025</p>
+        <p class="text-sm text-white/50 mt-1">First official remix</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest release spotlight -->
+  {
+    latest && (
+      <section class="mx-auto max-w-6xl px-6 py-24">
+        <div class="reveal flex items-end justify-between mb-8">
+          <div>
+            <p class="text-sm uppercase tracking-[0.3em] text-white/50 mb-2">Latest Release</p>
+            <h2 class="text-3xl md:text-4xl font-bold">{latest.data.title}</h2>
+          </div>
+          <a
+            href={`/releases/${latest.data.slug}/`}
+            class="hidden md:inline-flex text-white/70 hover:text-white transition-colors"
+          >
+            View release &rarr;
+          </a>
+        </div>
+        <div class="reveal grid gap-10 md:grid-cols-2 items-center rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-10">
+          <div class="aspect-square rounded-2xl overflow-hidden">
+            <img
+              src={latest.data.cover}
+              alt={latest.data.coverAlt}
+              width="1000"
+              height="1000"
+              loading="lazy"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <p class="text-white/50 mb-4">
+              {latest.data.label} &middot; {latest.data.year}
+            </p>
+            <p class="text-white/80 leading-relaxed mb-8">{latest.data.tagline}.</p>
+            <a
+              href={`/releases/${latest.data.slug}/`}
+              class="inline-flex items-center rounded-full bg-white text-ink font-semibold px-6 py-3 transition-transform hover:scale-105"
+            >
+              View Release
+            </a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- All releases grid -->
+  <section class="mx-auto max-w-6xl px-6 pb-24">
+    <div class="reveal flex items-end justify-between mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold">All Releases</h2>
+      <a href="/releases/" class="hidden md:inline-flex text-white/70 hover:text-white transition-colors">
+        View all &rarr;
+      </a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {featured.map((release, i) => <ReleaseCard release={release} priority={i < 3} />)}
+    </div>
+    <div class="mt-10 text-center md:hidden">
+      <a
+        href="/releases/"
+        class="inline-flex items-center rounded-full border border-white/25 text-white font-semibold px-6 py-3"
+      >
+        View all releases
+      </a>
+    </div>
+  </section>
+
+  <!-- Bio teaser -->
+  <section class="mx-auto max-w-4xl px-6 pb-28 text-center">
+    <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">About Ozee</p>
+    <p class="reveal text-xl md:text-2xl text-white/80 leading-relaxed text-balance mb-8">
+      What started as pure curiosity in 2018 grew into a passion for crafting music that blends
+      influences from across dance music &mdash; powerful, emotional and unmistakably his own.
+    </p>
+    <a
+      href="/about/"
+      class="reveal inline-flex items-center rounded-full border border-white/25 text-white font-semibold px-6 py-3 transition-colors hover:bg-white/10"
+    >
+      Read the full story
+    </a>
+  </section>
+</Layout>

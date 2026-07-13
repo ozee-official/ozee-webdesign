@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'music.song' | 'profile';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.svg',
+  imageAlt = 'Ozee — Progressive House & Festival EDM Producer',
+  type = 'website',
+  jsonLd,
+  noIndex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site);
+const pageTitle = title.includes('Ozee') ? title : `${title} | Ozee`;
+const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <link rel="icon" type="image/svg+xml" href="/images/mark.svg" />
+    <link rel="apple-touch-icon" href="/images/mark.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type === 'music.song' ? 'music.song' : type === 'profile' ? 'profile' : 'website'} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:site_name" content="Ozee" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    {ldEntries.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} is:inline />
+    ))}
+  </head>
+  <body class="min-h-screen flex flex-col antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink focus:font-semibold"
+    >
+      Skip to content
+    </a>
+    <SiteHeader />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+---
+const SPOTIFY_URL =
+  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/releases/', label: 'Releases' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 inset-x-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur-md">
+  <div class="mx-auto max-w-6xl px-6 flex items-center justify-between h-16">
+    <a href="/" class="flex items-center gap-2 shrink-0" aria-label="Ozee — Home">
+      <img src="/images/logo.svg" alt="Ozee logo" width="96" height="28" class="h-6 w-auto" />
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+      {
+        navItems.map((item) => {
+          const isActive =
+            item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'relative py-2 text-white/70 transition-colors hover:text-white',
+                { 'text-white': isActive },
+              ]}
+            >
+              {item.label}
+              {isActive && <span class="absolute -bottom-px left-0 right-0 h-px bg-white" />}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <a
+      href={SPOTIFY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hidden md:inline-flex items-center gap-2 rounded-full bg-white text-ink text-sm font-semibold px-4 py-2 transition-transform hover:scale-105"
+    >
+      Listen on Spotify
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="md:hidden flex flex-col justify-center gap-1.5 h-10 w-10 items-center"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="block h-px w-6 bg-white transition-transform"></span>
+      <span class="block h-px w-6 bg-white transition-opacity"></span>
+      <span class="block h-px w-6 bg-white transition-transform"></span>
+    </button>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    aria-label="Mobile"
+    class="md:hidden hidden flex-col gap-1 border-t border-white/10 bg-ink px-6 py-4"
+  >
+    {
+      navItems.map((item) => (
+        <a
+          href={item.href}
+          class="py-3 text-white/80 text-base border-b border-white/5 last:border-0"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      href={SPOTIFY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-4 inline-flex justify-center items-center rounded-full bg-white text-ink text-sm font-semibold px-4 py-3"
+    >
+      Listen on Spotify
+    </a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('flex');
+    menu?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+</script>

@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ReleaseCard from '../../components/ReleaseCard.astro';
+
+const releases = (await getCollection('releases')).sort((a, b) => b.data.year - a.data.year);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Ozee — Discography',
+  itemListElement: releases.map((release, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: new URL(`/releases/${release.data.slug}/`, Astro.site).toString(),
+    name: release.data.title,
+  })),
+};
+---
+
+<Layout
+  title="Releases — Discography"
+  description="Browse the full discography of Ozee, a German progressive house and festival EDM producer, including Magnets, Not What I Need, Embrace The Night, I'm Broken, Morgen Untergehen and Reminds Me Of You."
+  jsonLd={jsonLd}
+>
+  <section class="pt-40 pb-16 mx-auto max-w-6xl px-6">
+    <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">Discography</p>
+    <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">Releases</h1>
+    <p class="reveal text-white/70 max-w-2xl leading-relaxed">
+      From his first breakthrough in the progressive community to his latest work on FeelQ
+      Recordings, every Ozee release is a step in an evolving sound &mdash; melodic, energetic and
+      built for the festival stage.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-28">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {releases.map((release, i) => <ReleaseCard release={release} priority={i < 3} />)}
+    </div>
+  </section>
+</Layout>
