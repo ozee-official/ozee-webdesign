@@ -4,11 +4,12 @@
   "year": 2025,
   "order": 22,
   "label": "FeelQ Recordings",
-  "type": "original",
+  "type": "collaboration",
   "tagline": "Progressive house on FeelQ Recordings, 2025",
   "description": "I'm Never (Letting Go) landed on FeelQ Recordings in 2025, channeling heartfelt melodies into an energetic festival house production.",
-  "cover": "/images/releases/im-never-letting-go.svg",
+  "cover": "/images/releases/im-never-letting-go.jpg",
   "coverAlt": "Ozee - I'm Never (Letting Go) cover artwork, 2025 release on FeelQ Recordings",
   "accent": "#ff5da2",
-  "featured": true
+  "featured": true,
+  "with": "Zack Torrez feat. Robbie Hutton"
 }

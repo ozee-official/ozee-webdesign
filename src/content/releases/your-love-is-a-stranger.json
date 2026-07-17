@@ -4,11 +4,12 @@
   "year": 2026,
   "order": 24,
   "label": "Revealed Recordings",
-  "type": "original",
+  "type": "collaboration",
   "tagline": "Progressive house on Revealed Recordings, 2026",
   "description": "Your Love (Is A Stranger) arrived on Revealed Recordings in 2026, pairing an emotive melodic theme with driving festival house production.",
-  "cover": "/images/releases/your-love-is-a-stranger.svg",
+  "cover": "/images/releases/your-love-is-a-stranger.jpg",
   "coverAlt": "Ozee - Your Love (Is A Stranger) cover artwork, 2026 release on Revealed Recordings",
   "accent": "#ffc93d",
-  "featured": true
+  "featured": true,
+  "with": "Zack Torrez & Cyberzk feat. Ryan Crosby"
 }

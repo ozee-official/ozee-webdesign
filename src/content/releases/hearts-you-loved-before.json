@@ -4,11 +4,12 @@
   "year": 2025,
   "order": 21,
   "label": "Generation Smash",
-  "type": "original",
+  "type": "collaboration",
   "tagline": "Progressive house on Generation Smash, 2025",
   "description": "Hearts (You Loved Before), released via Generation Smash in 2025, blends emotional storytelling with melodic drive.",
-  "cover": "/images/releases/hearts-you-loved-before.svg",
+  "cover": "/images/releases/hearts-you-loved-before.jpg",
   "coverAlt": "Ozee - Hearts (You Loved Before) cover artwork, 2025 release on Generation Smash",
   "accent": "#8b6cff",
-  "featured": true
+  "featured": true,
+  "with": "Zack Torrez & Xtina Louise"
 }
