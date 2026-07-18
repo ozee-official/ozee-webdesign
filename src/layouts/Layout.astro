@@ -25,7 +25,7 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const imageURL = new URL(image, Astro.site);
-const pageTitle = title.includes('Ozee') ? title : `${title} | Ozee`;
+const pageTitle = title.startsWith('Ozee') ? title : `Ozee | ${title}`;
 const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 ---
 
