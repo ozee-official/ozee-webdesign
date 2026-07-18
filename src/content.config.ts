@@ -15,6 +15,7 @@ const releases = defineCollection({
     description: z.string(),
     cover: z.string(),
     coverAlt: z.string(),
+    spotifyUrl: z.string().url().optional(),
     accent: z.string(),
     featured: z.boolean().default(false),
   }),

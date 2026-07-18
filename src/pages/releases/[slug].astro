@@ -12,11 +12,12 @@ export async function getStaticPaths() {
 }
 
 const { release, allReleases } = Astro.props;
-const { title, year, label, type, with: collaborator, description, cover, coverAlt, accent } =
+const { title, year, label, type, with: collaborator, description, cover, coverAlt, accent, spotifyUrl } =
   release.data;
 
-const SPOTIFY_URL =
+const ARTIST_SPOTIFY_URL =
   'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+const trackSpotifyUrl = spotifyUrl ?? ARTIST_SPOTIFY_URL;
 
 const typeLabel =
   type === 'remix' ? 'Official Remix' : type === 'collaboration' ? 'Collaboration' : 'Original Release';
@@ -44,6 +45,7 @@ const jsonLd = {
     },
   },
   url: new URL(Astro.url.pathname, Astro.site).toString(),
+  ...(spotifyUrl ? { sameAs: [spotifyUrl] } : {}),
 };
 ---
 
@@ -91,7 +93,7 @@ const jsonLd = {
           </p>
           <p class="text-white/80 leading-relaxed mb-8">{description}</p>
           <a
-            href={SPOTIFY_URL}
+            href={trackSpotifyUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="btn-primary"
