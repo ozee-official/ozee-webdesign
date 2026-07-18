@@ -1,0 +1,14 @@
+{
+  "title": "Breathe",
+  "slug": "breathe",
+  "year": 2022,
+  "order": 5,
+  "label": "Self-Release",
+  "type": "original",
+  "tagline": "Self-released progressive house, 2022",
+  "description": "Breathe is a self-released 2022 single, showcasing the melodic foundations of Ozee's sound.",
+  "cover": "/images/releases/breathe.svg",
+  "coverAlt": "Ozee - Breathe cover artwork, 2022 release on Self-Release",
+  "accent": "#8b6cff",
+  "featured": true
+}

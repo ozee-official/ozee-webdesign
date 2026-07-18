@@ -1,0 +1,14 @@
+{
+  "title": "Cities",
+  "slug": "cities",
+  "year": 2022,
+  "order": 2,
+  "label": "Progressive Music",
+  "type": "original",
+  "tagline": "Progressive house on Progressive Music, 2022",
+  "description": "Cities, released via Progressive Music in 2022, is an early progressive house production from Ozee.",
+  "cover": "/images/releases/cities.svg",
+  "coverAlt": "Ozee - Cities cover artwork, 2022 release on Progressive Music",
+  "accent": "#ffc93d",
+  "featured": true
+}
