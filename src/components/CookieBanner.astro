@@ -1,0 +1,42 @@
+---
+---
+
+<div
+  id="cookie-banner"
+  class="hidden fixed inset-x-0 bottom-0 z-50 px-4 pb-4"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Cookie consent"
+>
+  <div class="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-ink-soft/95 backdrop-blur-md p-6 shadow-2xl">
+    <p class="text-sm text-white/70 leading-relaxed mb-4">
+      This site uses Google Analytics to understand how visitors use it. This only happens if you
+      agree.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      <button id="cookie-accept" type="button" class="btn-primary">Accept</button>
+      <button id="cookie-decline" type="button" class="btn-outline">Decline</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const acceptBtn = document.getElementById('cookie-accept');
+  const declineBtn = document.getElementById('cookie-decline');
+
+  if (!localStorage.getItem('cookie-consent')) {
+    banner?.classList.remove('hidden');
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'granted');
+    banner?.classList.add('hidden');
+    window.__enableAnalytics?.();
+  });
+
+  declineBtn?.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'denied');
+    banner?.classList.add('hidden');
+  });
+</script>
