@@ -1,1 +1,8 @@
+RewriteEngine On
+
+# Canonicalize to https://ozeemusic.com (no www, always https)
+RewriteCond %{HTTP_HOST} ^www\.ozeemusic\.com$ [NC,OR]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://ozeemusic.com%{REQUEST_URI} [L,R=301]
+
 ErrorDocument 404 /404.html
