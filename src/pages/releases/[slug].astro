@@ -12,15 +12,12 @@ export async function getStaticPaths() {
 }
 
 const { release, allReleases } = Astro.props;
-const { title, year, label, type, with: collaborator, description, cover, coverAlt, accent, spotifyUrl } =
+const { title, year, label, with: collaborator, description, cover, coverAlt, spotifyUrl } =
   release.data;
 
 const ARTIST_SPOTIFY_URL =
   'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
 const trackSpotifyUrl = spotifyUrl ?? ARTIST_SPOTIFY_URL;
-
-const typeLabel =
-  type === 'remix' ? 'Official Remix' : type === 'collaboration' ? 'Collaboration' : 'Original Release';
 
 const more = allReleases
   .filter((r) => r.data.slug !== release.data.slug)
@@ -58,11 +55,6 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <section class="relative overflow-hidden pt-40 pb-24">
-    <div
-      class="pointer-events-none absolute inset-0 -z-10"
-      style={`background: radial-gradient(55% 45% at 50% 0%, ${accent}22, transparent 70%);`}
-    >
-    </div>
     <div class="mx-auto max-w-5xl px-6">
       <a href="/releases/" class="reveal inline-flex items-center text-sm text-white/60 hover:text-white transition-colors mb-8">
         &larr; All releases
@@ -80,12 +72,6 @@ const jsonLd = {
           />
         </div>
         <div class="reveal">
-          <span
-            class="inline-block rounded-full px-3 py-1 text-xs font-semibold mb-4"
-            style={`background:${accent}33; color:#fff; border:1px solid ${accent}66;`}
-          >
-            {typeLabel}
-          </span>
           <h1 class="text-4xl md:text-5xl font-bold mb-3 text-balance">{title}</h1>
           <p class="text-white/50 mb-6">
             {label} &middot; {year}
