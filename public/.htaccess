@@ -5,4 +5,7 @@ RewriteCond %{HTTP_HOST} ^www\.ozeemusic\.com$ [NC,OR]
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://ozeemusic.com%{REQUEST_URI} [L,R=301]
 
+# Old Impressum permalink now lives at /legal-notice/
+RewriteRule ^impressum/?$ /legal-notice/ [L,R=301]
+
 ErrorDocument 404 /404.html
