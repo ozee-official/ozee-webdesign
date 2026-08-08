@@ -41,4 +41,8 @@
     localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
     banner?.classList.add('hidden');
   });
+
+  window.addEventListener('open-cookie-settings', () => {
+    banner?.classList.remove('hidden');
+  });
 </script>

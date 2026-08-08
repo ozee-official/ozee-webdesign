@@ -77,7 +77,21 @@ const year = new Date().getFullYear();
   <div class="border-t border-white/10">
     <div class="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/40">
       <p>&copy; {year} Ozee. All rights reserved.</p>
+      <a href="/privacy-policy/" class="hover:text-brand-soft transition-colors">Privacy Policy</a>
       <a href="/legal-notice/" class="hover:text-brand-soft transition-colors">Legal Notice</a>
+      <button
+        id="cookie-settings-btn"
+        type="button"
+        class="cursor-pointer hover:text-brand-soft transition-colors"
+      >
+        Cookie Settings
+      </button>
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById('cookie-settings-btn')?.addEventListener('click', () => {
+    window.dispatchEvent(new Event('open-cookie-settings'));
+  });
+</script>
