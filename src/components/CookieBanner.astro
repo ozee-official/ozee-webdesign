@@ -31,12 +31,14 @@
 
   acceptBtn?.addEventListener('click', () => {
     localStorage.setItem('cookie-consent', 'granted');
+    localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
     banner?.classList.add('hidden');
     window.__enableAnalytics?.();
   });
 
   declineBtn?.addEventListener('click', () => {
     localStorage.setItem('cookie-consent', 'denied');
+    localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
     banner?.classList.add('hidden');
   });
 </script>

@@ -47,7 +47,14 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         gtag('config', 'G-CK0M7CC8Y4');
       };
 
-      if (localStorage.getItem('cookie-consent') === 'granted') {
+      var CONSENT_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000; // consent expires after 12 months
+      var consentTimestamp = parseInt(localStorage.getItem('cookie-consent-timestamp'), 10);
+      var consentExpired = !consentTimestamp || Date.now() - consentTimestamp > CONSENT_MAX_AGE_MS;
+
+      if (consentExpired) {
+        localStorage.removeItem('cookie-consent');
+        localStorage.removeItem('cookie-consent-timestamp');
+      } else if (localStorage.getItem('cookie-consent') === 'granted') {
         window.__enableAnalytics();
       }
     </script>
