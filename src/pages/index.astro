@@ -1,14 +1,17 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ReleaseCard from '../components/ReleaseCard.astro';
-
-const SPOTIFY_URL =
-  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
+import { SPOTIFY_URL } from '../data/socials';
 
 const releases = (await getCollection('releases')).sort((a, b) => b.data.order - a.data.order);
 const latest = releases[0];
-const featured = releases.slice(0, 6);
+const recent = releases.slice(1, 7);
+const labels = [...new Set(releases.map((release) => release.data.label))].filter(
+  (label) => !['Official Remix', 'Self-Release'].includes(label)
+);
+const tickerItems = latest
+  ? ['Out now', latest.data.title, latest.data.label, 'Listen now']
+  : [];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -30,128 +33,240 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="relative overflow-hidden pt-40 pb-24 md:pt-48 md:pb-32">
-    <div class="mx-auto max-w-6xl px-6 grid gap-12 md:grid-cols-2 items-center">
-      <div>
-        <h1 class="reveal text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] mb-6">
-          OZEE
-        </h1>
-        <p class="reveal text-lg text-white/70 max-w-md mb-8 text-balance">
+  <section class="relative flex flex-col overflow-hidden md:min-h-[100svh] md:flex-row md:items-end">
+    <div class="hero-photo h-[64svh] md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[58%]">
+      <img
+        src="/images/press/hero-portrait.jpg"
+        alt="Portrait of Ozee, progressive house and festival EDM producer from Germany"
+        width="1024"
+        height="1076"
+        loading="eager"
+        fetchpriority="high"
+        class="h-full w-full object-cover object-top"
+      />
+    </div>
+
+    <div class="relative mx-auto -mt-24 w-full max-w-6xl px-6 pb-14 md:mt-0 md:pt-40 md:pb-20">
+      <p class="reveal eyebrow mb-5">Progressive House &middot; Germany</p>
+      <h1 class="reveal font-display text-[clamp(5rem,21vw,15rem)] leading-[0.8] -ml-[0.04em]">
+        OZEE
+      </h1>
+      <div class="mt-8 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
+        <p class="reveal max-w-md text-lg text-paper/80 text-balance">
           I&rsquo;m a German music producer crafting melodic progressive house music. Since 2018,
           I&rsquo;ve been shaping my sound with emotional melodies, powerful energy, and a passion
           for creating unforgettable moments through music.
         </p>
-        <div class="reveal flex flex-wrap gap-4">
-          <a
-            href={SPOTIFY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-primary"
-          >
+        <div class="reveal flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
+          <a href={SPOTIFY_URL} target="_blank" rel="noopener noreferrer" class="btn-primary">
             Listen on Spotify
           </a>
-          <a
-            href="/releases/"
-            class="btn-outline"
-          >
-            Explore Releases
-          </a>
-        </div>
-      </div>
-
-      <div class="reveal relative">
-        <div class="aspect-[4/5] rounded-3xl overflow-hidden border border-white/10">
-          <img
-            src="/images/press/hero-portrait.png"
-            alt="Portrait of Ozee, progressive house and festival EDM producer from Germany"
-            width="1024"
-            height="1076"
-            loading="eager"
-            fetchpriority="high"
-            class="h-full w-full object-cover"
-          />
+          <a href="/releases/" class="btn-outline">Explore Releases</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Out-now ticker -->
+  {
+    latest && (
+      <a
+        href={`/releases/${latest.data.slug}/`}
+        aria-label={`Out now: ${latest.data.title} on ${latest.data.label}`}
+        class="ticker block overflow-hidden bg-brand py-4 text-ink"
+      >
+        <div class="ticker-track flex w-max animate-marquee">
+          {[0, 1].map((copy) => (
+            <div class="flex shrink-0 items-center" aria-hidden={copy === 1 ? 'true' : undefined}>
+              {[0, 1, 2].map(() =>
+                tickerItems.map((item) => (
+                  <>
+                    <span class="px-6 text-lg font-extrabold uppercase [font-stretch:125%]">{item}</span>
+                    <span class="h-4 w-6 -skew-x-[28deg] bg-[repeating-linear-gradient(to_right,#000_0_4px,transparent_4px_8px)]" />
+                  </>
+                ))
+              )}
+            </div>
+          ))}
+        </div>
+      </a>
+    )
+  }
+
   <!-- Latest release spotlight -->
   {
     latest && (
-      <section class="mx-auto max-w-6xl px-6 py-24">
-        <div class="reveal flex items-end justify-between mb-8">
-          <div>
-            <p class="text-sm uppercase tracking-[0.3em] text-white/50 mb-2">Latest Release</p>
-            <h2 class="text-3xl md:text-4xl font-bold">{latest.data.title}</h2>
-          </div>
+      <section class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div class="grid items-center gap-12 md:grid-cols-[5fr_6fr] md:gap-20">
           <a
             href={`/releases/${latest.data.slug}/`}
-            class="hidden md:inline-flex text-white/70 hover:text-white transition-colors"
+            class="reveal group relative block mr-4 mb-4 md:mr-5 md:mb-5"
           >
-            View release &rarr;
-          </a>
-        </div>
-        <div class="reveal grid gap-10 md:grid-cols-2 items-center rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-10">
-          <div class="aspect-square rounded-2xl overflow-hidden">
+            <span class="absolute inset-0 translate-x-4 translate-y-4 bg-brand transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:translate-x-5 md:translate-y-5" />
             <img
               src={latest.data.cover}
               alt={latest.data.coverAlt}
               width="1000"
               height="1000"
               loading="lazy"
-              class="h-full w-full object-cover"
+              class="relative aspect-square w-full object-cover"
             />
-          </div>
+          </a>
           <div>
-            <p class="text-white/50 mb-4">
-              {latest.data.label} &middot; {latest.data.year}
-            </p>
-            <p class="text-white/80 leading-relaxed mb-8">{latest.data.tagline}</p>
-            <a
-              href={`/releases/${latest.data.slug}/`}
-              class="btn-primary"
-            >
-              View Release
-            </a>
+            <p class="reveal eyebrow mb-5">Latest Release</p>
+            <h2 class="reveal font-display text-4xl md:text-6xl mb-8">{latest.data.title}</h2>
+            <dl class="reveal mb-8 border-t border-line">
+              <div class="flex justify-between gap-6 border-b border-line py-3">
+                <dt class="meta text-paper/50">Label</dt>
+                <dd class="meta text-right">{latest.data.label}</dd>
+              </div>
+              {latest.data.with && (
+                <div class="flex justify-between gap-6 border-b border-line py-3">
+                  <dt class="meta text-paper/50">With</dt>
+                  <dd class="meta text-right">{latest.data.with}</dd>
+                </div>
+              )}
+              <div class="flex justify-between gap-6 border-b border-line py-3">
+                <dt class="meta text-paper/50">Year</dt>
+                <dd class="meta text-right">{latest.data.year}</dd>
+              </div>
+            </dl>
+            <p class="reveal mb-10 text-lg leading-relaxed text-paper/80">{latest.data.tagline}</p>
+            <div class="reveal flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
+              {latest.data.spotifyUrl && (
+                <a
+                  href={latest.data.spotifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-primary"
+                >
+                  Listen now
+                </a>
+              )}
+              <a href={`/releases/${latest.data.slug}/`} class="btn-outline">
+                View Release
+              </a>
+            </div>
           </div>
         </div>
       </section>
     )
   }
 
-  <!-- All releases grid -->
-  <section class="mx-auto max-w-6xl px-6 pb-24">
-    <div class="reveal flex items-end justify-between mb-8">
-      <h2 class="text-3xl md:text-4xl font-bold">All Releases</h2>
-      <a href="/releases/" class="hidden md:inline-flex text-white/70 hover:text-white transition-colors">
-        View all &rarr;
+  <!-- Recent releases -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+    <div class="reveal mb-8 flex items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow mb-4">Discography</p>
+        <h2 class="font-display text-4xl md:text-6xl">All Releases</h2>
+      </div>
+      <a href="/releases/" class="group meta hidden items-center gap-2 pb-2 text-paper/75 transition-colors hover:text-brand md:inline-flex">
+        View all {releases.length} <span class="arrow"></span>
       </a>
     </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {featured.map((release, i) => <ReleaseCard release={release} priority={i < 3} />)}
+    <ul class="border-t border-line">
+      {
+        recent.map((release) => (
+          <li class="reveal border-b border-line">
+            <a
+              href={`/releases/${release.data.slug}/`}
+              class="group -mx-3 grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 px-3 py-3 transition-colors hover:bg-brand hover:text-ink md:grid-cols-[2.5rem_4.5rem_1fr_13rem_3.5rem_1.5rem] md:gap-6"
+            >
+              <span class="meta hidden opacity-50 md:block">
+                {String(release.data.order).padStart(2, '0')}
+              </span>
+              <img
+                src={release.data.cover}
+                alt={release.data.coverAlt}
+                width="144"
+                height="144"
+                loading="lazy"
+                decoding="async"
+                class="aspect-square w-full object-cover"
+              />
+              <span class="min-w-0">
+                <span class="block font-bold uppercase leading-tight [font-stretch:112%] md:text-xl">
+                  {release.data.title}
+                </span>
+                <span class="meta mt-1.5 block opacity-60">
+                  <span class="md:hidden">
+                    {release.data.label} &middot; {release.data.year}
+                  </span>
+                  {release.data.with && (
+                    <span class="hidden md:inline">with {release.data.with}</span>
+                  )}
+                </span>
+              </span>
+              <span class="meta hidden opacity-60 md:block">{release.data.label}</span>
+              <span class="meta hidden opacity-60 md:block">{release.data.year}</span>
+              <span class="arrow"></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="mt-10 pl-1.5 md:hidden">
+      <a href="/releases/" class="btn-outline">View all releases</a>
     </div>
-    <div class="mt-10 text-center md:hidden">
-      <a
-        href="/releases/"
-        class="btn-outline"
-      >
-        View all releases
-      </a>
+  </section>
+
+  <!-- Labels -->
+  <section class="border-y border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <p class="reveal eyebrow mb-8">Released on</p>
+      <ul class="reveal flex flex-wrap gap-x-6 gap-y-3">
+        {
+          labels.map((label) => (
+            <li class="font-display text-base text-paper/45 transition-colors hover:text-paper md:text-3xl">
+              {label}
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
   <!-- Bio teaser -->
-  <section class="mx-auto max-w-4xl px-6 pb-28 text-center">
-    <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">About Ozee</p>
-    <p class="reveal text-xl md:text-2xl text-white/80 leading-relaxed text-balance mb-8">
-      What started as pure curiosity in 2018 grew into a passion for crafting music that blends
-      influences from various dance music genres: powerful, emotional and yet festival-ready.
-    </p>
-    <a
-      href="/about/"
-      class="reveal btn-outline"
-    >
-      Read my full story
-    </a>
+  <section class="mx-auto max-w-6xl px-6 pt-24 pb-8 md:pt-32">
+    <div class="grid items-center gap-14 md:grid-cols-[4fr_7fr] md:gap-20">
+      <div class="reveal ticks mx-2 md:mx-0">
+        <img
+          src="/images/press/press-photo-1.jpeg"
+          alt="Ozee, German progressive house producer, outdoors in a white hoodie"
+          width="1204"
+          height="1600"
+          loading="lazy"
+          class="aspect-[4/5] w-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="reveal eyebrow mb-6">About Ozee</p>
+        <p class="reveal mb-10 text-2xl font-medium leading-snug text-balance md:text-4xl md:leading-[1.2]">
+          What started as pure curiosity in 2018 grew into a passion for crafting music that
+          blends influences from various dance music genres: powerful, emotional and yet
+          festival-ready.
+        </p>
+        <a href="/about/" class="reveal btn-outline ml-1.5">Read my full story</a>
+      </div>
+    </div>
   </section>
 </Layout>
+
+<style>
+  .hero-photo {
+    mask-image: linear-gradient(to top, transparent 0%, #000 40%);
+  }
+
+  @media (min-width: 768px) {
+    .hero-photo {
+      mask-image:
+        linear-gradient(to right, transparent 0%, #000 40%),
+        linear-gradient(to top, transparent 0%, #000 28%);
+      mask-composite: intersect;
+    }
+  }
+
+  .ticker:hover .ticker-track {
+    animation-play-state: paused;
+  }
+</style>

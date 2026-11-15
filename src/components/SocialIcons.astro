@@ -1,0 +1,30 @@
+---
+import { socials } from '../data/socials';
+
+interface Props {
+  class?: string;
+  size?: string;
+}
+
+const { class: className = '', size = 'h-5 w-5' } = Astro.props;
+---
+
+<ul class:list={['flex items-center', className]}>
+  {
+    socials.map((social) => (
+      <li>
+        <a
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Ozee on ${social.name}`}
+          class="block p-1 text-paper transition-colors hover:text-brand"
+        >
+          <svg class={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d={social.icon} />
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

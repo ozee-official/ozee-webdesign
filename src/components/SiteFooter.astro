@@ -1,88 +1,74 @@
 ---
-const SPOTIFY_URL =
-  'https://open.spotify.com/intl-de/artist/4HCreTyqXNdNXZKMYr4qCX?si=k1KQCrOnQiCeBKHsIFPFkA';
-const INSTAGRAM_URL = 'https://www.instagram.com/_ozeemusic_/';
-const SOUNDCLOUD_URL = 'https://soundcloud.com/ozeemusic';
-const YOUTUBE_URL = 'https://www.youtube.com/@ozeemusic7198';
+import { socials } from '../data/socials';
+
 const year = new Date().getFullYear();
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/releases/', label: 'Releases' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
 ---
 
-<footer class="border-t border-white/10 mt-24">
-  <div class="mx-auto max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-3">
-    <div>
-      <img src="/images/logo.png" alt="Ozee logo" width="1600" height="448" class="h-6 w-auto mb-4" />
-      <p class="text-white/60 text-sm max-w-xs">
-        Electronic Music Producer from Germany, creating melodic, high-energy dance music since
-        2018.
-      </p>
-    </div>
+<footer class="mt-24 border-t border-line">
+  <div class="mx-auto max-w-6xl px-6 pt-16 pb-10">
+    <p class="eyebrow mb-6">Stay connected</p>
+    <ul class="grid sm:grid-cols-2 sm:gap-x-10">
+      {
+        socials.map((social) => (
+          <li class="border-b border-line">
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center justify-between gap-4 py-5 transition-colors hover:text-brand"
+            >
+              <span class="flex items-center gap-4">
+                <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d={social.icon} />
+                </svg>
+                <span class="font-display text-2xl md:text-3xl">{social.name}</span>
+              </span>
+              <span class="arrow arrow-out text-lg"></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
-    <nav aria-label="Footer" class="text-sm">
-      <h2 class="text-white/40 uppercase tracking-widest text-xs mb-4">Explore</h2>
-      <ul class="space-y-2 text-white/70">
-        <li><a href="/" class="hover:text-brand-soft transition-colors">Home</a></li>
-        <li><a href="/releases/" class="hover:text-brand-soft transition-colors">Releases</a></li>
-        <li><a href="/about/" class="hover:text-brand-soft transition-colors">About</a></li>
-        <li><a href="/contact/" class="hover:text-brand-soft transition-colors">Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="text-sm">
-      <h2 class="text-white/40 uppercase tracking-widest text-xs mb-4">Connect</h2>
-      <ul class="space-y-2 text-white/70">
-        <li>
-          <a
-            href={SPOTIFY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-brand-soft transition-colors"
-          >
-            Spotify
-          </a>
-        </li>
-        <li>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-brand-soft transition-colors"
-          >
-            Instagram
-          </a>
-        </li>
-        <li>
-          <a
-            href={SOUNDCLOUD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-brand-soft transition-colors"
-          >
-            SoundCloud
-          </a>
-        </li>
-        <li>
-          <a
-            href={YOUTUBE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-brand-soft transition-colors"
-          >
-            YouTube
-          </a>
-        </li>
-      </ul>
+    <div class="mt-16 flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+      <div>
+        <img src="/images/logo.png" alt="Ozee logo" width="1600" height="448" class="h-10 w-auto mb-5" />
+        <p class="max-w-xs text-sm text-paper/60">
+          Electronic Music Producer from Germany, creating melodic, high-energy dance music since
+          2018.
+        </p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="flex flex-wrap gap-x-8 gap-y-3">
+          {
+            navItems.map((item) => (
+              <li>
+                <a href={item.href} class="meta text-paper/75 transition-colors hover:text-brand">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <div class="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/40">
+  <div class="border-t border-line">
+    <div class="meta mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-6 py-6 text-paper/50">
       <p>&copy; {year} Ozee. All rights reserved.</p>
-      <a href="/privacy-policy/" class="hover:text-brand-soft transition-colors">Privacy Policy</a>
-      <a href="/legal-notice/" class="hover:text-brand-soft transition-colors">Legal Notice</a>
+      <a href="/privacy-policy/" class="transition-colors hover:text-brand">Privacy Policy</a>
+      <a href="/legal-notice/" class="transition-colors hover:text-brand">Legal Notice</a>
       <button
         id="cookie-settings-btn"
         type="button"
-        class="cursor-pointer hover:text-brand-soft transition-colors"
+        class="meta cursor-pointer transition-colors hover:text-brand"
       >
         Cookie Settings
       </button>

@@ -20,9 +20,13 @@
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/archivo": "^5.3.0",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.7",
     "tailwindcss": "^4.3.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "simple-icons": "^16.38.0"
   }
 }

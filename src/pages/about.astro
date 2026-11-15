@@ -41,31 +41,31 @@ const jsonLd = {
   type="profile"
   jsonLd={jsonLd}
 >
-  <section class="relative overflow-hidden pt-40 pb-20">
-    <div class="mx-auto max-w-6xl px-6 grid gap-12 md:grid-cols-2 items-center">
+  <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
+    <div class="grid items-end gap-14 md:grid-cols-[7fr_4fr] md:gap-20">
       <div>
-        <p class="reveal text-sm uppercase tracking-[0.3em] text-white/50 mb-4">About</p>
-        <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">My Story</h1>
-        <p class="reveal text-white/70 leading-relaxed">
+        <p class="reveal eyebrow mb-5">About</p>
+        <h1 class="reveal font-display text-5xl md:text-8xl mb-8">My Story</h1>
+        <p class="reveal max-w-md text-xl leading-relaxed text-paper/80">
           I&rsquo;m an electronic music producer from Germany, shaping my sound since 2018.
         </p>
       </div>
-      <div class="reveal aspect-[4/5] rounded-3xl overflow-hidden border border-white/10">
+      <div class="reveal ticks mx-2 md:mx-0">
         <img
           src="/images/press/press-photo-1.jpeg"
           alt="Portrait of Ozee, German progressive house and festival EDM producer"
           width="1204"
           height="1600"
           loading="eager"
-          class="h-full w-full object-cover"
+          class="aspect-[4/5] w-full object-cover"
         />
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-16">
-    <h2 class="reveal text-2xl md:text-3xl font-bold mb-6">Hey, I&rsquo;m Ozee.</h2>
-    <div class="reveal space-y-6 text-white/80 leading-relaxed text-lg">
+  <section class="mx-auto grid max-w-6xl gap-8 px-6 py-16 md:grid-cols-[4fr_7fr] md:gap-20">
+    <h2 class="reveal font-display text-3xl md:text-4xl">Hey, I&rsquo;m Ozee.</h2>
+    <div class="reveal space-y-6 text-lg leading-relaxed text-paper/80">
       <p>
         My journey started back in 2018 out of pure curiosity. I had no idea it would turn into
         the passion it is today, but along the way, artists like Martin Garrix, Alesso, and
@@ -79,19 +79,19 @@ const jsonLd = {
       <p>
         Things really started moving in 2020, when I got my first real recognition in the
         progressive scene. That opened doors I didn&rsquo;t expect, and in 2022 I hit a big
-        milestone with my first major collaboration, <a href="/releases/magnets/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Magnets</a>,
-        released on Glow Records. From there, things kept building: <a href="/releases/not-what-i-need/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Not What I Need</a> dropped
-        on Soulz Music Group in 2023, and 2024 brought two more releases close to my heart: <a href="/releases/embrace-the-night/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Embrace The Night</a> on
-        Ensis Records and <a href="/releases/im-broken/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">I'm Broken</a> on
+        milestone with my first major collaboration, <a href="/releases/magnets/" class="link">Magnets</a>,
+        released on Glow Records. From there, things kept building: <a href="/releases/not-what-i-need/" class="link">Not What I Need</a> dropped
+        on Soulz Music Group in 2023, and 2024 brought two more releases close to my heart: <a href="/releases/embrace-the-night/" class="link">Embrace The Night</a> on
+        Ensis Records and <a href="/releases/im-broken/" class="link">I'm Broken</a> on
         Future House Cloud.
       </p>
       <p>
         2025 has honestly been one of my favorite years yet. I got to produce my first official
-        remix, <a href="/releases/morgen-untergehen/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Morgen Untergehen</a>,
-        for German singer-songwriter Ann-Cathrin, and joined FeelQ Recordings with <a href="/releases/reminds-me-of-you/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Reminds Me Of You</a>.
+        remix, <a href="/releases/morgen-untergehen/" class="link">Morgen Untergehen</a>,
+        for German singer-songwriter Ann-Cathrin, and joined FeelQ Recordings with <a href="/releases/reminds-me-of-you/" class="link">Reminds Me Of You</a>.
       </p>
       <p>
-        Then came 2026, and a dream came true. My collaboration <a href="/releases/your-love-is-a-stranger/" class="underline decoration-white/30 underline-offset-4 hover:decoration-brand hover:text-brand-soft transition-colors">Your Love (Is A Stranger)</a> got
+        Then came 2026, and a dream came true. My collaboration <a href="/releases/your-love-is-a-stranger/" class="link">Your Love (Is A Stranger)</a> got
         released on Hardwell&rsquo;s imprint, Revealed Radar. Growing up on his music, seeing my
         name on that label still feels a little surreal.
       </p>
@@ -103,35 +103,30 @@ const jsonLd = {
     </div>
   </section>
 
-  <section class="border-y border-white/10 bg-white/[0.02]">
-    <div class="mx-auto max-w-3xl px-6 py-16">
-      <h2 class="reveal text-2xl md:text-3xl font-bold mb-10">Timeline</h2>
-      <ol class="reveal relative border-l border-white/15 space-y-10 pl-8">
-        {
-          timeline.map((item) => (
-            <li>
-              <span class="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full bg-brand" />
-              <p class="text-sm uppercase tracking-widest text-white/40 mb-1">{item.year}</p>
-              <p class="text-white/80 leading-relaxed">{item.text}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <p class="reveal eyebrow mb-5">Milestones</p>
+    <h2 class="reveal font-display text-4xl md:text-6xl mb-10">Timeline</h2>
+    <ol class="border-t border-line">
+      {
+        timeline.map((item) => (
+          <li class="reveal grid gap-2 border-b border-line py-6 md:grid-cols-[4fr_7fr] md:items-baseline md:gap-20">
+            <p class="font-display text-4xl text-brand md:text-5xl">{item.year}</p>
+            <p class="text-lg leading-relaxed text-paper/80">{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
-  <section class="mx-auto max-w-3xl px-6 py-16 text-center">
-    <h2 class="reveal text-2xl md:text-3xl font-bold mb-4">Sound &amp; Influences</h2>
-    <p class="reveal text-white/70 leading-relaxed mb-8">
-      I&rsquo;m rooted in the melodic progressive house genre that shaped artists like Martin
-      Garrix, Alesso, and many more. But what defines my sound are genre-crossing influences,
-      shaped through my own blend of emotion and energy.
-    </p>
-    <a
-      href="/releases/"
-      class="reveal btn-primary"
-    >
-      Explore my Releases
-    </a>
+  <section class="mx-auto max-w-6xl px-6 pt-16 pb-8">
+    <div class="reveal border border-line p-8 md:p-14">
+      <p class="eyebrow mb-5">Sound &amp; Influences</p>
+      <p class="mb-10 max-w-3xl text-2xl font-medium leading-snug md:text-3xl">
+        I&rsquo;m rooted in the melodic progressive house genre that shaped artists like Martin
+        Garrix, Alesso, and many more. But what defines my sound are genre-crossing influences,
+        shaped through my own blend of emotion and energy.
+      </p>
+      <a href="/releases/" class="btn-primary ml-1.5">Explore my Releases</a>
+    </div>
   </section>
 </Layout>

@@ -1,38 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const INSTAGRAM_URL = 'https://www.instagram.com/_ozeemusic_/';
-const CONTACT_EMAIL = 'ozeemusic.contact@gmail.com';
+import { CONTACT_EMAIL, INSTAGRAM_URL } from '../data/socials';
 ---
 
 <Layout
   title="Contact"
   description="Get in touch with Ozee for collaborations, remixes and press inquiries."
 >
-  <section class="relative overflow-hidden pt-40 pb-24 min-h-[70vh] flex items-center">
-    <div class="mx-auto max-w-2xl px-6 text-center">
-      <p class="reveal text-sm uppercase tracking-[0.3em] text-brand-soft/80 mb-4">Get In Touch</p>
-      <h1 class="reveal text-4xl md:text-5xl font-bold mb-6">Contact</h1>
-      <p class="reveal text-white/70 leading-relaxed mb-10">
-        For collaborations, remixes or press inquiries, reach out directly by email or message me
-        on Instagram.
-      </p>
-      <div class="reveal flex flex-col sm:flex-row gap-4 justify-center">
+  <section class="mx-auto max-w-6xl px-6 pt-40 pb-12">
+    <p class="reveal eyebrow mb-5">Get In Touch</p>
+    <h1 class="reveal font-display text-5xl md:text-8xl mb-8">Contact</h1>
+    <p class="reveal max-w-xl text-lg leading-relaxed text-paper/75 mb-14">
+      For collaborations, remixes or press inquiries, reach out directly by email or message me
+      on Instagram.
+    </p>
+
+    <ul class="reveal border-t border-line">
+      <li class="border-b border-line">
         <a
           href={`mailto:${CONTACT_EMAIL}`}
-          class="btn-primary"
+          class="group -mx-3 flex flex-col gap-2 px-3 py-7 transition-colors hover:bg-brand hover:text-ink md:flex-row md:items-center md:justify-between md:gap-8"
         >
-          {CONTACT_EMAIL}
+          <span class="font-display text-3xl md:text-5xl">Email</span>
+          <span class="flex items-center gap-4 text-base md:text-xl">
+            <span class="break-all">{CONTACT_EMAIL}</span>
+            <span class="arrow"></span>
+          </span>
         </a>
+      </li>
+      <li class="border-b border-line">
         <a
           href={INSTAGRAM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-outline"
+          class="group -mx-3 flex flex-col gap-2 px-3 py-7 transition-colors hover:bg-brand hover:text-ink md:flex-row md:items-center md:justify-between md:gap-8"
         >
-          Message on Instagram
+          <span class="font-display text-3xl md:text-5xl">Instagram</span>
+          <span class="flex items-center gap-4 text-base md:text-xl">
+            Message on Instagram
+            <span class="arrow arrow-out"></span>
+          </span>
         </a>
-      </div>
-    </div>
+      </li>
+    </ul>
   </section>
 </Layout>
