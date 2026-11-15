@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import SocialRail from '../components/SocialRail.astro';
+import BackToTop from '../components/BackToTop.astro';
 
 interface Props {
   title: string;
@@ -104,6 +105,7 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
       <slot />
     </main>
     <SiteFooter />
+    <BackToTop />
     <CookieBanner />
     <script>
       const observer = new IntersectionObserver(

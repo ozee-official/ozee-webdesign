@@ -1,0 +1,53 @@
+---
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label="Back to top"
+  class="back-to-top fixed right-4 bottom-5 z-30 flex h-12 w-12 items-center justify-center bg-brand text-ink md:hidden"
+>
+  <span class="arrow -rotate-90 text-lg"></span>
+</button>
+
+<style>
+  .back-to-top {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .back-to-top[data-visible] {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+</style>
+
+<script>
+  // Shown only while scrolling back up, once the reader is well down the page.
+  const button = document.getElementById('back-to-top');
+  const MIN_DEPTH = 600;
+  const JITTER = 6;
+  let lastY = window.scrollY;
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) < JITTER) return;
+      button?.toggleAttribute('data-visible', y < lastY && y > MIN_DEPTH);
+      lastY = y;
+    },
+    { passive: true }
+  );
+
+  button?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
