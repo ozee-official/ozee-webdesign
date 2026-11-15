@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { SPOTIFY_URL } from '../data/socials';
+import { labelLinks } from '../data/labels';
 
 const releases = (await getCollection('releases')).sort((a, b) => b.data.order - a.data.order);
 const latest = releases[0];
@@ -102,14 +103,14 @@ const jsonLd = {
             href={`/releases/${latest.data.slug}/`}
             class="reveal group relative block mr-4 mb-4 md:mr-5 md:mb-5"
           >
-            <span class="absolute inset-0 translate-x-4 translate-y-4 bg-brand transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2 md:translate-x-5 md:translate-y-5" />
+            <span class="absolute inset-0 translate-x-4 translate-y-4 bg-brand transition-transform duration-300 group-hover:translate-x-6 group-hover:translate-y-6 md:translate-x-5 md:translate-y-5 md:group-hover:translate-x-7 md:group-hover:translate-y-7" />
             <img
               src={latest.data.cover}
               alt={latest.data.coverAlt}
               width="1000"
               height="1000"
               loading="lazy"
-              class="relative aspect-square w-full object-cover"
+              class="relative aspect-square w-full object-cover transition-transform duration-300 group-hover:-translate-x-2 group-hover:-translate-y-2"
             />
           </a>
           <div>
@@ -154,7 +155,7 @@ const jsonLd = {
   }
 
   <!-- Recent releases -->
-  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+  <section id="discography" class="mx-auto max-w-6xl scroll-mt-24 px-6 pb-24 md:pb-32">
     <div class="reveal mb-8 flex items-end justify-between gap-6">
       <div>
         <p class="eyebrow mb-4">Discography</p>
@@ -211,14 +212,25 @@ const jsonLd = {
   </section>
 
   <!-- Labels -->
-  <section class="border-y border-line">
+  <section class="hidden border-y border-line md:block">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <p class="reveal eyebrow mb-8">Released on</p>
       <ul class="reveal flex flex-wrap gap-x-6 gap-y-3">
         {
           labels.map((label) => (
-            <li class="font-display text-base text-paper/45 transition-colors hover:text-paper md:text-3xl">
-              {label}
+            <li class="font-display text-3xl text-paper/45 transition-colors hover:text-paper">
+              {labelLinks[label] ? (
+                <a
+                  href={labelLinks[label]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="transition-colors hover:text-brand"
+                >
+                  {label}
+                </a>
+              ) : (
+                label
+              )}
             </li>
           ))
         }
@@ -241,7 +253,10 @@ const jsonLd = {
       </div>
       <div>
         <p class="reveal eyebrow mb-6">About Ozee</p>
-        <p class="reveal mb-10 text-2xl font-medium leading-snug text-balance md:text-4xl md:leading-[1.2]">
+        <h2 class="reveal font-display text-3xl md:text-5xl mb-8">
+          Powerful, emotional, festival-ready.
+        </h2>
+        <p class="reveal mb-10 max-w-xl text-lg leading-relaxed text-paper/80">
           What started as pure curiosity in 2018 grew into a passion for crafting music that
           blends influences from various dance music genres: powerful, emotional and yet
           festival-ready.

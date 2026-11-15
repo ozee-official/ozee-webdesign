@@ -55,11 +55,12 @@ const jsonLd = {
 >
   <section class="mx-auto max-w-6xl px-6 pt-32 pb-24 md:pt-40">
     <a
+      id="back-link"
       href="/releases/"
       class="reveal group meta mb-10 inline-flex items-center gap-3 text-paper/60 transition-colors hover:text-brand"
     >
       <span class="arrow rotate-180"></span>
-      All releases
+      <span id="back-label">All releases</span>
     </a>
     <div class="grid items-center gap-12 md:grid-cols-[5fr_6fr] md:gap-20">
       <div class="reveal relative mr-4 mb-4 md:mr-5 md:mb-5">
@@ -128,3 +129,21 @@ const jsonLd = {
     )
   }
 </Layout>
+
+<script>
+  // Arriving from the homepage, the back link returns there (and to the same scroll position).
+  const link = document.getElementById('back-link');
+  const label = document.getElementById('back-label');
+  const referrer = document.referrer ? new URL(document.referrer) : null;
+
+  if (link && label && referrer?.origin === location.origin && referrer.pathname === '/') {
+    label.textContent = 'Back to home';
+    link.setAttribute('href', '/#discography');
+    link.addEventListener('click', (event) => {
+      if (history.length > 1) {
+        event.preventDefault();
+        history.back();
+      }
+    });
+  }
+</script>
