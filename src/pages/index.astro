@@ -48,7 +48,6 @@ const jsonLd = {
     </div>
 
     <div class="relative mx-auto -mt-24 w-full max-w-6xl px-6 pb-14 md:mt-0 md:pt-40 md:pb-20">
-      <p class="reveal eyebrow mb-5">Progressive House &middot; Germany</p>
       <h1 class="reveal font-display text-[clamp(5rem,21vw,15rem)] leading-[0.8] -ml-[0.04em]">
         OZEE
       </h1>
@@ -269,11 +268,16 @@ const jsonLd = {
 
 <style>
   .hero-photo {
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 40%);
     mask-image: linear-gradient(to top, transparent 0%, #000 40%);
   }
 
   @media (min-width: 768px) {
     .hero-photo {
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, #000 40%),
+        linear-gradient(to top, transparent 0%, #000 28%);
+      -webkit-mask-composite: source-in;
       mask-image:
         linear-gradient(to right, transparent 0%, #000 40%),
         linear-gradient(to top, transparent 0%, #000 28%);
