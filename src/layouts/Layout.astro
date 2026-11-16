@@ -40,6 +40,8 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
       function gtag() { dataLayer.push(arguments); }
 
       window.__enableAnalytics = function () {
+        if (window.__analyticsOn) return;
+        window.__analyticsOn = true;
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://www.googletagmanager.com/gtag/js?id=G-CK0M7CC8Y4';
@@ -48,14 +50,24 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         gtag('config', 'G-CK0M7CC8Y4');
       };
 
+      // Stored choice: 'granted', 'denied' or null (none, expired, unreadable or storage blocked).
       var CONSENT_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000; // consent expires after 12 months
-      var consentTimestamp = parseInt(localStorage.getItem('cookie-consent-timestamp'), 10);
-      var consentExpired = !consentTimestamp || Date.now() - consentTimestamp > CONSENT_MAX_AGE_MS;
+      window.__cookieConsent = (function () {
+        try {
+          var value = localStorage.getItem('cookie-consent');
+          var timestamp = parseInt(localStorage.getItem('cookie-consent-timestamp'), 10);
+          var valid =
+            (value === 'granted' || value === 'denied') &&
+            timestamp &&
+            Date.now() - timestamp <= CONSENT_MAX_AGE_MS;
+          if (valid) return value;
+          localStorage.removeItem('cookie-consent');
+          localStorage.removeItem('cookie-consent-timestamp');
+        } catch (e) {}
+        return null;
+      })();
 
-      if (consentExpired) {
-        localStorage.removeItem('cookie-consent');
-        localStorage.removeItem('cookie-consent-timestamp');
-      } else if (localStorage.getItem('cookie-consent') === 'granted') {
+      if (window.__cookieConsent === 'granted') {
         window.__enableAnalytics();
       }
     </script>

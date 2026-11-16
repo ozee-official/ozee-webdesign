@@ -26,22 +26,26 @@
   const acceptBtn = document.getElementById('cookie-accept');
   const declineBtn = document.getElementById('cookie-decline');
 
-  if (!localStorage.getItem('cookie-consent')) {
+  function remember(choice: 'granted' | 'denied') {
+    try {
+      localStorage.setItem('cookie-consent', choice);
+      localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
+    } catch {
+      // Storage is blocked: the choice then only applies to this page view.
+    }
+    banner?.classList.add('hidden');
+  }
+
+  if (!window.__cookieConsent) {
     banner?.classList.remove('hidden');
   }
 
   acceptBtn?.addEventListener('click', () => {
-    localStorage.setItem('cookie-consent', 'granted');
-    localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
-    banner?.classList.add('hidden');
+    remember('granted');
     window.__enableAnalytics?.();
   });
 
-  declineBtn?.addEventListener('click', () => {
-    localStorage.setItem('cookie-consent', 'denied');
-    localStorage.setItem('cookie-consent-timestamp', String(Date.now()));
-    banner?.classList.add('hidden');
-  });
+  declineBtn?.addEventListener('click', () => remember('denied'));
 
   window.addEventListener('open-cookie-settings', () => {
     banner?.classList.remove('hidden');
