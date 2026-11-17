@@ -49,7 +49,7 @@ const kinds = [
   {
     label: 'Original',
     title: 'Original FLPs',
-    text: 'The complete FL Studio projects of my own original tracks, so you also see the arrangement and songwriting behind them.',
+    text: 'The complete FL Studio projects of my own tracks and remixes, so you also see the full arrangement and, for my original tracks, the songwriting.',
     covers: ['Arrangement', 'Songwriting', 'Sound selection', 'Mixing', 'Mastering'],
   },
 ];
@@ -80,7 +80,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between a drop remake and an original FLP?',
-    a: 'A drop remake is the drop of a well-known progressive house or big room track that I rebuilt from scratch in FL Studio, as close to the original as possible. An original FLP is the complete project of one of my own tracks, including its arrangement and songwriting.',
+    a: 'A drop remake is the drop of a well-known progressive house or big room track that I rebuilt from scratch in FL Studio, as close to the original as possible. An original FLP is the complete project of one of my own tracks or remixes, with the full arrangement and, for my original tracks, the songwriting.',
   },
   {
     q: 'Can I use the project files in my own releases?',
@@ -121,7 +121,7 @@ const jsonLd = [
     itemListElement: projectFiles.map((file, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      name: `${file.artist} - ${file.title} (FL Studio ${file.kind === 'Original' ? 'Project File' : 'Drop Remake'})`,
+      name: `${file.artist} - ${file.title} (${file.kind}, FL Studio project file)`,
       url: file.url,
     })),
   },
@@ -151,7 +151,7 @@ const jsonLd = [
     <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
       <p class="reveal max-w-2xl text-lg leading-relaxed text-paper/80">
         Open the complete FL Studio project behind a finished drop. I share drop remakes of
-        well-known progressive house and big room tracks, and full FLPs of my own original tracks.
+        well-known progressive house and big room tracks, and full FLPs of my own tracks and remixes.
         Every download is a ZIP with the full project, samples and presets, so you see the sound
         selection, mixing and mastering exactly as they were done.
       </p>
@@ -229,6 +229,7 @@ const jsonLd = [
       <div>
         <p class="eyebrow mb-4">In the store</p>
         <h2 class="font-display text-3xl md:text-5xl">Available FLPs</h2>
+        <p class="meta mt-4 text-paper/50">{projectFiles.length} project files &middot; newest first</p>
       </div>
       <a
         href={PAYHIP_URL}
@@ -247,7 +248,7 @@ const jsonLd = [
               href={file.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group -mx-3 grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-3 py-5 transition-colors hover:bg-brand hover:text-ink md:grid-cols-[9rem_1fr_auto]"
+              class="group -mx-3 grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-3 py-5 transition-colors hover:bg-brand hover:text-ink md:grid-cols-[9rem_1fr_5rem_auto]"
             >
               <span class="meta col-span-2 text-brand group-hover:text-ink md:col-span-1">
                 {file.kind}
@@ -260,8 +261,10 @@ const jsonLd = [
                   {file.artist}
                   {file.note && <> &middot; {file.note}</>}
                   {' '}&middot; FL Studio
+                  {file.price && <span class="md:hidden"> &middot; {file.price}</span>}
                 </span>
               </span>
+              <span class="meta hidden text-right md:block">{file.price}</span>
               <span class="arrow arrow-out"></span>
             </a>
           </li>
