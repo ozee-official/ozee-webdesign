@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { PAYHIP_URL, YOUTUBE_URL } from '../data/socials';
+import { projectFiles } from '../data/project-files';
 
 // Decorative arrangement view: each clip is [start %, length %] on a 0–100 timeline.
 const sections = [
@@ -22,7 +23,7 @@ const lanes = [
 const inside = [
   {
     title: 'Complete FL Studio project',
-    text: 'The full FLP with every channel, pattern, playlist clip and mixer insert, exactly as the finished track.',
+    text: 'The full FLP with every channel, pattern, playlist clip and mixer insert, exactly as it was finished.',
   },
   {
     title: 'Samples',
@@ -40,15 +41,15 @@ const inside = [
 
 const kinds = [
   {
-    label: 'Remake',
-    title: 'Progressive House Remakes',
-    text: 'Well-known progressive house tracks that I rebuilt from scratch in FL Studio, as close to the original as possible.',
+    label: 'Drop Remake',
+    title: 'Drop Remakes',
+    text: 'The drops of well-known progressive house and big room tracks, rebuilt from scratch in FL Studio as close to the original as possible.',
     covers: ['Sound selection', 'Mixing', 'Mastering'],
   },
   {
     label: 'Original',
     title: 'Original FLPs',
-    text: 'The complete FL Studio projects of my own tracks, so you also see the arrangement and songwriting behind my music.',
+    text: 'The complete FL Studio projects of my own original tracks, so you also see the arrangement and songwriting behind them.',
     covers: ['Arrangement', 'Songwriting', 'Sound selection', 'Mixing', 'Mastering'],
   },
 ];
@@ -56,7 +57,7 @@ const kinds = [
 const steps = [
   {
     title: 'Listen',
-    text: 'Hear the remakes on my YouTube channel and my own tracks on Spotify, and pick the one you want to learn from.',
+    text: 'Hear the drop remakes on my YouTube channel and pick the project you want to learn from.',
   },
   {
     title: 'Download',
@@ -71,15 +72,15 @@ const steps = [
 const faqs = [
   {
     q: 'What is included in a project file?',
-    a: 'Every download is a ZIP with the complete FL Studio project (FLP), all samples and the presets used. You see the sound selection, mixing and mastering exactly as in the finished track. The original FLPs of my own tracks also show the full arrangement and songwriting.',
+    a: 'Every download is a ZIP with the complete FL Studio project (FLP), all samples and the presets used. You see the sound selection, mixing and mastering exactly as in the finished version. The original FLPs of my own tracks also show the full arrangement and songwriting.',
   },
   {
     q: 'Which DAW do I need?',
     a: 'The projects are made in FL Studio, so you need FL Studio to open the FLP files.',
   },
   {
-    q: 'What is the difference between a remake and an original FLP?',
-    a: 'A remake is a well-known progressive house track that I rebuilt from scratch in FL Studio, as close to the original as possible. An original FLP is the actual project file of one of my own tracks, including its arrangement and songwriting.',
+    q: 'What is the difference between a drop remake and an original FLP?',
+    a: 'A drop remake is the drop of a well-known progressive house or big room track that I rebuilt from scratch in FL Studio, as close to the original as possible. An original FLP is the complete project of one of my own tracks, including its arrangement and songwriting.',
   },
   {
     q: 'Can I use the project files in my own releases?',
@@ -90,8 +91,8 @@ const faqs = [
     a: 'All project files are sold and delivered through my Payhip store at payhip.com/ozee. Payhip handles the payment and the download.',
   },
   {
-    q: 'Can I hear a track before I buy the project file?',
-    a: 'Yes. The remakes are on my YouTube channel, and my own tracks are on Spotify and in the releases section of this website.',
+    q: 'Can I hear a remake before I buy the project file?',
+    a: 'Yes. I post the drop remakes on my YouTube channel, so you can listen first and then decide.',
   },
   {
     q: 'Who are the project files for?',
@@ -109,9 +110,20 @@ const jsonLd = [
     '@type': 'WebPage',
     name: 'FL Studio Project Files & Progressive House FLPs by Ozee',
     url: new URL(Astro.url.pathname, Astro.site).toString(),
-    about: 'FL Studio project files of progressive house remakes and original tracks, for educational purposes',
+    about: 'FL Studio project files: drop remakes of progressive house and big room tracks and original FLPs, for educational purposes',
     author: { '@type': 'Person', name: 'Ozee' },
     relatedLink: [PAYHIP_URL, YOUTUBE_URL],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'FL Studio project files by Ozee',
+    itemListElement: projectFiles.map((file, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `${file.artist} - ${file.title} (FL Studio ${file.kind === 'Original' ? 'Project File' : 'Drop Remake'})`,
+      url: file.url,
+    })),
   },
   {
     '@context': 'https://schema.org',
@@ -127,7 +139,7 @@ const jsonLd = [
 
 <Layout
   title="FL Studio Project Files & Progressive House FLPs"
-  description="FL Studio project files by Ozee: progressive house remakes and original FLPs, each with samples, presets, mixing and mastering. Download them on Payhip."
+  description="FL Studio project files by Ozee: drop remakes and original progressive house & big room FLPs with samples, presets, mixing and mastering. On Payhip."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
@@ -138,9 +150,9 @@ const jsonLd = [
     </h1>
     <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
       <p class="reveal max-w-2xl text-lg leading-relaxed text-paper/80">
-        Open the complete FL Studio project behind a finished progressive house track. I share
-        remakes of well-known progressive house songs and the original FLPs of my own tracks. Every
-        download is a ZIP with the full project, samples and presets, so you see the sound
+        Open the complete FL Studio project behind a finished drop. I share drop remakes of
+        well-known progressive house and big room tracks, and full FLPs of my own original tracks.
+        Every download is a ZIP with the full project, samples and presets, so you see the sound
         selection, mixing and mastering exactly as they were done.
       </p>
       <div class="reveal">
@@ -209,6 +221,53 @@ const jsonLd = [
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Available project files -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+    <div class="reveal mb-8 flex items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow mb-4">In the store</p>
+        <h2 class="font-display text-3xl md:text-5xl">Available FLPs</h2>
+      </div>
+      <a
+        href={PAYHIP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group meta hidden shrink-0 items-center gap-2 whitespace-nowrap pb-2 text-paper/75 transition-colors hover:text-brand md:inline-flex"
+      >
+        View on Payhip <span class="arrow arrow-out"></span>
+      </a>
+    </div>
+    <ul class="border-t border-line">
+      {
+        projectFiles.map((file) => (
+          <li class="reveal border-b border-line">
+            <a
+              href={file.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group -mx-3 grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 px-3 py-5 transition-colors hover:bg-brand hover:text-ink md:grid-cols-[9rem_1fr_auto]"
+            >
+              <span class="meta col-span-2 text-brand group-hover:text-ink md:col-span-1">
+                {file.kind}
+              </span>
+              <span class="min-w-0">
+                <span class="block font-bold uppercase leading-tight [font-stretch:112%] md:text-xl">
+                  {file.title}
+                </span>
+                <span class="meta mt-1.5 block opacity-60">
+                  {file.artist}
+                  {file.note && <> &middot; {file.note}</>}
+                  {' '}&middot; FL Studio
+                </span>
+              </span>
+              <span class="arrow arrow-out"></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <!-- What's in the ZIP -->
@@ -287,16 +346,16 @@ const jsonLd = [
       <div class="reveal space-y-6 text-lg leading-relaxed text-paper/80">
         <p>
           Tutorials usually show one technique at a time. A complete FL Studio project shows how all
-          of them work together in a finished, release-ready progressive house track: how the kick and bass
-          share the low end, how the chords open up in the breakdown, how the build-up creates
-          tension and why the drop hits as hard as it does.
+          of them work together in a finished drop: how the kick and bass share the low end, how
+          the leads and chords are layered and why the drop hits as hard as it does. The original
+          FLPs go further and show the whole track, from the breakdown and build-up to the
+          arrangement and songwriting.
         </p>
         <p>
           I&rsquo;ve been producing melodic progressive house since 2018, with releases on labels
           like Revealed Recordings, Generation Smash and Stardust Records. The project files are
           where I share that workflow with other producers who want to learn EDM production from
-          real tracks, and with the original FLPs you get the arrangement and songwriting of my
-          own music as well.
+          real tracks.
         </p>
         <p>
           <a href="/releases/" class="link">Listen to my own releases</a>
