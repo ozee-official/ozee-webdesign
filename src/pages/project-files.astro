@@ -43,7 +43,7 @@ const kinds = [
   {
     label: 'Drop Remake',
     title: 'Drop Remakes',
-    text: 'The drops of well-known progressive house and big room tracks, rebuilt from scratch in FL Studio as close to the original as possible.',
+    text: 'The drops of well-known progressive house and big room tracks, rebuilt from scratch in FL Studio as close to the original as possible. All drop remakes are free.',
     covers: ['Sound selection', 'Mixing', 'Mastering'],
   },
   {
@@ -73,6 +73,10 @@ const faqs = [
   {
     q: 'What is included in a project file?',
     a: 'Every download is a ZIP with the complete FL Studio project (FLP), all samples and the presets used. You see the sound selection, mixing and mastering exactly as in the finished version. The original FLPs of my own tracks also show the full arrangement and songwriting.',
+  },
+  {
+    q: 'Are the project files free?',
+    a: 'All drop remakes and some of my original FLPs are free to download. The other original FLPs cost €3.99 each. The price is listed next to every project file on this page.',
   },
   {
     q: 'Which DAW do I need?',
@@ -108,7 +112,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'FL Studio Project Files & Progressive House FLPs by Ozee',
+    name: 'FL Studio Project Files & Free Progressive House FLPs by Ozee',
     url: new URL(Astro.url.pathname, Astro.site).toString(),
     about: 'FL Studio project files: drop remakes of progressive house and big room tracks and original FLPs, for educational purposes',
     author: { '@type': 'Person', name: 'Ozee' },
@@ -138,8 +142,8 @@ const jsonLd = [
 ---
 
 <Layout
-  title="FL Studio Project Files & Progressive House FLPs"
-  description="FL Studio project files by Ozee: drop remakes and original progressive house & big room FLPs with samples, presets, mixing and mastering. On Payhip."
+  title="FL Studio Project Files & Free Progressive House FLPs"
+  description="FL Studio project files by Ozee: free drop remakes and original progressive house & big room FLPs with samples, presets, mixing and mastering. On Payhip."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
@@ -152,8 +156,9 @@ const jsonLd = [
       <p class="reveal max-w-2xl text-lg leading-relaxed text-paper/80">
         Open the complete FL Studio project behind a finished drop. I share drop remakes of
         well-known progressive house and big room tracks, and full FLPs of my own tracks and remixes.
-        Every download is a ZIP with the full project, samples and presets, so you see the sound
-        selection, mixing and mastering exactly as they were done.
+        All drop remakes are free, and some of my original FLPs are free too. Every download is a
+        ZIP with the full project, samples and presets, so you see the sound selection, mixing and
+        mastering exactly as they were done.
       </p>
       <div class="reveal">
         <div class="flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
@@ -264,7 +269,14 @@ const jsonLd = [
                   {file.price && <span class="md:hidden"> &middot; {file.price}</span>}
                 </span>
               </span>
-              <span class="meta hidden text-right md:block">{file.price}</span>
+              <span
+                class:list={[
+                  'meta hidden text-right md:block',
+                  file.price === 'Free' && 'text-brand group-hover:text-ink',
+                ]}
+              >
+                {file.price}
+              </span>
               <span class="arrow arrow-out"></span>
             </a>
           </li>
