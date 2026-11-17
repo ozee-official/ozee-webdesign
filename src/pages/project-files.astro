@@ -147,7 +147,7 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="mx-auto max-w-6xl px-6 pt-40 pb-12">
+  <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
     <p class="reveal eyebrow mb-5">Free &amp; Original FLPs</p>
     <h1 class="reveal font-display text-5xl md:text-8xl mb-8">Project Files</h1>
     <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
@@ -181,7 +181,7 @@ const jsonLd = [
           <span class="block h-8 border-b border-line"></span>
           {
             lanes.map((lane) => (
-              <span class="meta flex h-9 items-center border-b border-line text-paper/60 max-md:text-[0.6rem] max-md:tracking-[0.06em]">
+              <span class="meta flex h-9 items-center border-b border-line text-paper/60 max-md:text-[0.6rem] max-md:tracking-[0.06em] md:h-11">
                 {lane.name}
               </span>
             ))
@@ -202,7 +202,7 @@ const jsonLd = [
           </div>
           {
             lanes.map((lane) => (
-              <div class="relative h-9 border-b border-line">
+              <div class="relative h-9 border-b border-line md:h-11">
                 {lane.clips.map(([start, length]) => (
                   <span
                     class:list={[
@@ -224,16 +224,16 @@ const jsonLd = [
   <!-- Scroll cue: visible on arrival, hides once the visitor scrolls -->
   <div
     id="scroll-cue"
-    class="scroll-cue pointer-events-none fixed inset-x-0 bottom-0 z-20 flex justify-center bg-gradient-to-t from-ink from-45% via-ink/90 to-transparent pt-24 pb-6 lg:bg-none lg:pt-0"
+    class="scroll-cue pointer-events-none fixed inset-x-0 bottom-0 z-20 flex justify-center bg-gradient-to-t from-ink from-45% via-ink/90 to-transparent pt-24 pb-6"
   >
     <a
       href="#flps"
       aria-label="Scroll down to the project files"
-      class="group pointer-events-auto flex flex-col items-center gap-2 text-paper/80 transition-colors hover:text-brand lg:flex-row lg:gap-0 lg:border lg:border-paper/40 lg:bg-ink lg:pl-4 lg:hover:border-brand"
+      class="group pointer-events-auto flex flex-col items-center gap-2 text-paper/80 transition-colors hover:text-brand"
     >
       <span class="meta">Scroll to the FLPs</span>
-      <span class="flex h-11 w-11 items-center justify-center border border-paper/40 bg-ink transition-colors group-hover:border-brand lg:border-0">
-        <span class="scroll-cue-arrow arrow rotate-90 text-lg"></span>
+      <span class="scroll-cue-box flex h-11 w-11 items-center justify-center border border-paper/40 bg-ink transition-colors group-hover:border-brand">
+        <span class="arrow rotate-90 text-lg"></span>
       </span>
     </a>
   </div>
@@ -467,7 +467,7 @@ const jsonLd = [
       visibility 0s linear 0.3s;
   }
 
-  .scroll-cue-arrow {
+  .scroll-cue-box {
     animation: scroll-cue-bounce 1.6s ease-in-out infinite;
   }
 
@@ -477,7 +477,7 @@ const jsonLd = [
       transform: translateY(0);
     }
     50% {
-      transform: translateY(4px);
+      transform: translateY(6px);
     }
   }
 
@@ -508,8 +508,14 @@ const jsonLd = [
 </style>
 
 <script>
+  // Shown only on arrival and only while the product list is still below the fold.
   const cue = document.getElementById('scroll-cue');
-  const updateCue = () => cue?.toggleAttribute('data-hidden', window.scrollY > 80);
+  const list = document.getElementById('flps');
+  const updateCue = () => {
+    const listVisible = (list?.getBoundingClientRect().top ?? 0) < window.innerHeight;
+    cue?.toggleAttribute('data-hidden', window.scrollY > 80 || listVisible);
+  };
   updateCue();
   window.addEventListener('scroll', updateCue, { passive: true });
+  window.addEventListener('resize', updateCue);
 </script>
