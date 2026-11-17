@@ -146,6 +146,8 @@ const jsonLd = [
   description="FL Studio project files by Ozee: free drop remakes and original progressive house & big room FLPs with samples, presets, mixing and mastering. On Payhip."
   jsonLd={jsonLd}
 >
+  <!-- First screen: always at least one viewport tall, so the list starts below the fold -->
+  <div class="min-h-[100svh]">
   <!-- Hero -->
   <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
     <p class="reveal eyebrow mb-5">Free &amp; Original FLPs</p>
@@ -220,6 +222,7 @@ const jsonLd = [
       </div>
     </div>
   </section>
+  </div>
 
   <!-- Scroll cue: visible on arrival, hides once the visitor scrolls -->
   <div
