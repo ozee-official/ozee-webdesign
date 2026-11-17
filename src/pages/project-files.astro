@@ -21,54 +21,81 @@ const lanes = [
 
 const inside = [
   {
-    title: 'Arrangement',
-    text: 'Follow the structure from intro to breakdown, build-up and drop, and see bar by bar how the energy rises before the drop hits.',
+    title: 'Complete FL Studio project',
+    text: 'The full FLP with every channel, pattern, playlist clip and mixer insert, exactly as the finished track.',
   },
   {
-    title: 'Sound Design',
-    text: 'Look at the synth layers, basses and effects behind the leads instead of guessing them from the finished master.',
+    title: 'Samples',
+    text: 'All samples used in the project are in the ZIP, so you see the sound selection behind every part of the track.',
   },
   {
-    title: 'Chords & Melodies',
-    text: 'Read the chord progressions and melodies note by note, and hear how small changes give a progressive house hook its emotion.',
+    title: 'Presets',
+    text: 'The synth presets behind the leads, chords and basses, so you can load and study the exact sounds.',
   },
   {
-    title: 'Mixdown',
-    text: 'Check levels, EQ, compression, sidechain and automation in context, the way they sit in a release-ready EDM track.',
+    title: 'Mixing & Mastering',
+    text: 'The full mixer setup with EQ, compression, sidechain and effects, plus the mastering chain on the master channel.',
+  },
+];
+
+const kinds = [
+  {
+    label: 'Remake',
+    title: 'Progressive House Remakes',
+    text: 'Well-known progressive house tracks that I rebuilt from scratch in FL Studio, as close to the original as possible.',
+    covers: ['Sound selection', 'Mixing', 'Mastering'],
+  },
+  {
+    label: 'Original',
+    title: 'Original FLPs',
+    text: 'The complete FL Studio projects of my own tracks, so you also see the arrangement and songwriting behind my music.',
+    covers: ['Arrangement', 'Songwriting', 'Sound selection', 'Mixing', 'Mastering'],
   },
 ];
 
 const steps = [
   {
-    title: 'Watch',
-    text: 'Hear the remakes on my YouTube channel and pick the track you want to learn from.',
+    title: 'Listen',
+    text: 'Hear the remakes on my YouTube channel and my own tracks on Spotify, and pick the one you want to learn from.',
   },
   {
     title: 'Download',
-    text: 'Get the project file in my Payhip store. Payment and download are handled there.',
+    text: 'Get the project file in my Payhip store. You receive a ZIP with the FLP, samples and presets.',
   },
   {
     title: 'Learn',
-    text: 'Open the session, solo the parts and use what you learn in your own productions.',
+    text: 'Open the FLP in FL Studio, solo the channels and use what you learn in your own productions.',
   },
 ];
 
 const faqs = [
   {
-    q: 'What is a remake project file?',
-    a: 'A remake is a well-known track rebuilt from scratch, as close to the original as possible. The project file is the full session of that remake, with every part laid out in the arrangement so you can see how the track is put together.',
+    q: 'What is included in a project file?',
+    a: 'Every download is a ZIP with the complete FL Studio project (FLP), all samples and the presets used. You see the sound selection, mixing and mastering exactly as in the finished track. The original FLPs of my own tracks also show the full arrangement and songwriting.',
+  },
+  {
+    q: 'Which DAW do I need?',
+    a: 'The projects are made in FL Studio, so you need FL Studio to open the FLP files.',
+  },
+  {
+    q: 'What is the difference between a remake and an original FLP?',
+    a: 'A remake is a well-known progressive house track that I rebuilt from scratch in FL Studio, as close to the original as possible. An original FLP is the actual project file of one of my own tracks, including its arrangement and songwriting.',
+  },
+  {
+    q: 'Can I use the project files in my own releases?',
+    a: 'No. All project files are for educational purposes only: to study how the tracks are made and to learn techniques for your own original music. The projects, remakes and their parts may not be released, sold or shared.',
   },
   {
     q: 'Where can I download the project files?',
     a: 'All project files are sold and delivered through my Payhip store at payhip.com/ozee. Payhip handles the payment and the download.',
   },
   {
-    q: 'Can I hear a remake before I buy it?',
-    a: 'Yes. I post the remakes on my YouTube channel, so you can listen first and then decide which project file you want.',
+    q: 'Can I hear a track before I buy the project file?',
+    a: 'Yes. The remakes are on my YouTube channel, and my own tracks are on Spotify and in the releases section of this website.',
   },
   {
     q: 'Who are the project files for?',
-    a: 'For producers who want to learn progressive house and EDM production from finished tracks: beginners who want to understand arrangement and song structure, and experienced producers who want to compare sound design and mixing decisions.',
+    a: 'For producers who want to learn progressive house and EDM production in FL Studio from finished tracks: beginners who want to understand how a track is built, and experienced producers who want to compare sound selection, mixing and mastering decisions.',
   },
   {
     q: 'I have a question about a project file. How do I reach you?',
@@ -80,9 +107,9 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
-    name: 'Progressive House Remake Project Files by Ozee',
+    name: 'FL Studio Project Files & Progressive House FLPs by Ozee',
     url: new URL(Astro.url.pathname, Astro.site).toString(),
-    about: 'Remake project files of progressive house tracks for music producers',
+    about: 'FL Studio project files of progressive house remakes and original tracks, for educational purposes',
     author: { '@type': 'Person', name: 'Ozee' },
     relatedLink: [PAYHIP_URL, YOUTUBE_URL],
   },
@@ -99,29 +126,35 @@ const jsonLd = [
 ---
 
 <Layout
-  title="Progressive House Remake Project Files"
-  description="Progressive house remake project files by Ozee. Open the full session of well-known tracks, study arrangement, sound design and mixdown, and download them on Payhip."
+  title="FL Studio Project Files & Progressive House FLPs"
+  description="FL Studio project files by Ozee: progressive house remakes and original FLPs, each with samples, presets, mixing and mastering. Download them on Payhip."
   jsonLd={jsonLd}
 >
   <!-- Hero -->
   <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
     <h1 class="mb-8">
-      <span class="reveal eyebrow mb-5">Progressive House Remake</span>
+      <span class="reveal eyebrow mb-5">FL Studio &middot; Progressive House</span>
       <span class="reveal block font-display text-5xl md:text-8xl">Project Files</span>
     </h1>
     <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
       <p class="reveal max-w-2xl text-lg leading-relaxed text-paper/80">
-        I remake well-known progressive house tracks from scratch and share the project files, so
-        you can open the full session and see exactly how the drops, chords, leads and mixdown come
-        together. Watch the remakes on YouTube, then download the project files in my Payhip store.
+        Open the complete FL Studio project behind a finished progressive house track. I share
+        remakes of well-known progressive house songs and the original FLPs of my own tracks. Every
+        download is a ZIP with the full project, samples and presets, so you see the sound
+        selection, mixing and mastering exactly as they were done.
       </p>
-      <div class="reveal flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
-        <a href={PAYHIP_URL} target="_blank" rel="noopener noreferrer" class="btn-primary">
-          Shop on Payhip
-        </a>
-        <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" class="btn-outline">
-          Watch on YouTube
-        </a>
+      <div class="reveal">
+        <div class="flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
+          <a href={PAYHIP_URL} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Shop on Payhip
+          </a>
+          <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" class="btn-outline">
+            Watch on YouTube
+          </a>
+        </div>
+        <p class="meta mt-5 text-paper/50">
+          FL Studio &middot; ZIP download &middot; For educational purposes only
+        </p>
       </div>
     </div>
   </section>
@@ -130,7 +163,7 @@ const jsonLd = [
   <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32" aria-hidden="true">
     <div class="reveal border border-line bg-ink-soft p-4 md:p-6">
       <div class="mb-3 flex items-center justify-between">
-        <span class="meta text-paper/50">Remake session</span>
+        <span class="meta text-paper/50">FL Studio project</span>
         <span class="meta text-brand">128 BPM</span>
       </div>
       <div class="grid grid-cols-[3.75rem_1fr] md:grid-cols-[6rem_1fr]">
@@ -178,13 +211,13 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- What's inside -->
+  <!-- What's in the ZIP -->
   <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
     <div class="grid gap-10 md:grid-cols-[4fr_7fr] md:gap-20">
       <div>
-        <p class="reveal eyebrow mb-5">Inside the session</p>
+        <p class="reveal eyebrow mb-5">What's in the ZIP</p>
         <h2 class="reveal font-display text-3xl lg:text-5xl">
-          See how a progressive house track is built
+          Everything behind the finished track
         </h2>
       </div>
       <ol class="border-t border-line">
@@ -203,11 +236,33 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Remakes & originals -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+    <p class="reveal eyebrow mb-5">Remakes &amp; originals</p>
+    <h2 class="reveal font-display text-3xl md:text-5xl mb-10">Two kinds of FLPs</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        kinds.map((kind) => (
+          <article class="reveal flex flex-col border border-line p-6 md:p-10">
+            <p class="meta mb-6 self-start bg-brand px-3 py-1.5 text-ink">{kind.label}</p>
+            <h3 class="mb-4 font-display text-2xl md:text-3xl">{kind.title}</h3>
+            <p class="mb-8 leading-relaxed text-paper/75">{kind.text}</p>
+            <ul class="mt-auto flex flex-wrap gap-2">
+              {kind.covers.map((item) => (
+                <li class="meta border border-line px-3 py-1.5 text-paper/70">{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
   <!-- How it works -->
   <section class="border-y border-line">
     <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
       <p class="reveal eyebrow mb-5">How it works</p>
-      <h2 class="reveal font-display text-3xl md:text-5xl mb-12">Watch. Download. Learn.</h2>
+      <h2 class="reveal font-display text-3xl md:text-5xl mb-12">Listen. Download. Learn.</h2>
       <ol class="grid gap-10 md:grid-cols-3 md:gap-8">
         {
           steps.map((step, i) => (
@@ -226,13 +281,13 @@ const jsonLd = [
   <section class="mx-auto max-w-6xl px-6 py-24 md:py-32">
     <div class="grid gap-10 md:grid-cols-[4fr_7fr] md:gap-20">
       <div>
-        <p class="reveal eyebrow mb-5">Why remakes</p>
+        <p class="reveal eyebrow mb-5">Why project files</p>
         <h2 class="reveal font-display text-3xl md:text-5xl">Learn from a finished track</h2>
       </div>
       <div class="reveal space-y-6 text-lg leading-relaxed text-paper/80">
         <p>
-          Tutorials usually show one technique at a time. A remake shows how all of them work
-          together in a finished, release-ready progressive house track: how the kick and bass
+          Tutorials usually show one technique at a time. A complete FL Studio project shows how all
+          of them work together in a finished, release-ready progressive house track: how the kick and bass
           share the low end, how the chords open up in the breakdown, how the build-up creates
           tension and why the drop hits as hard as it does.
         </p>
@@ -240,7 +295,8 @@ const jsonLd = [
           I&rsquo;ve been producing melodic progressive house since 2018, with releases on labels
           like Revealed Recordings, Generation Smash and Stardust Records. The project files are
           where I share that workflow with other producers who want to learn EDM production from
-          real tracks.
+          real tracks, and with the original FLPs you get the arrangement and songwriting of my
+          own music as well.
         </p>
         <p>
           <a href="/releases/" class="link">Listen to my own releases</a>
@@ -292,6 +348,7 @@ const jsonLd = [
       <span>
         <span class="meta mb-3 block opacity-70">payhip.com/ozee</span>
         <span class="block font-display text-3xl md:text-6xl">Browse all project files</span>
+        <span class="meta mt-4 block opacity-70">For educational purposes only</span>
       </span>
       <span class="arrow arrow-out text-4xl md:text-6xl"></span>
     </a>
