@@ -5,6 +5,7 @@ export const SPOTIFY_URL =
 export const INSTAGRAM_URL = 'https://www.instagram.com/_ozeemusic_/';
 export const SOUNDCLOUD_URL = 'https://soundcloud.com/ozeemusic';
 export const YOUTUBE_URL = 'https://www.youtube.com/@ozeemusic7198';
+export const PAYHIP_URL = 'https://payhip.com/ozee';
 export const CONTACT_EMAIL = 'ozeemusic.contact@gmail.com';
 
 export const socials = [

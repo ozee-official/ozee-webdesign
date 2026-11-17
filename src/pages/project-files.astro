@@ -1,0 +1,339 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { PAYHIP_URL, YOUTUBE_URL } from '../data/socials';
+
+// Decorative arrangement view: each clip is [start %, length %] on a 0–100 timeline.
+const sections = [
+  { name: 'Intro', width: 18 },
+  { name: 'Build', width: 18 },
+  { name: 'Drop', width: 24 },
+  { name: 'Break', width: 16 },
+  { name: 'Drop', width: 24 },
+];
+const lanes = [
+  { name: 'Drums', clips: [[0, 36], [36, 24], [76, 24]], accent: false },
+  { name: 'Bass', clips: [[18, 18], [36, 24], [76, 24]], accent: false },
+  { name: 'Chords', clips: [[0, 18], [36, 24], [60, 40]], accent: false },
+  { name: 'Lead', clips: [[36, 24], [76, 24]], accent: true },
+  { name: 'Vocals', clips: [[8, 22], [60, 16]], accent: false },
+  { name: 'FX', clips: [[30, 6], [56, 4], [70, 6]], accent: false },
+];
+
+const inside = [
+  {
+    title: 'Arrangement',
+    text: 'Follow the structure from intro to breakdown, build-up and drop, and see bar by bar how the energy rises before the drop hits.',
+  },
+  {
+    title: 'Sound Design',
+    text: 'Look at the synth layers, basses and effects behind the leads instead of guessing them from the finished master.',
+  },
+  {
+    title: 'Chords & Melodies',
+    text: 'Read the chord progressions and melodies note by note, and hear how small changes give a progressive house hook its emotion.',
+  },
+  {
+    title: 'Mixdown',
+    text: 'Check levels, EQ, compression, sidechain and automation in context, the way they sit in a release-ready EDM track.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Watch',
+    text: 'Hear the remakes on my YouTube channel and pick the track you want to learn from.',
+  },
+  {
+    title: 'Download',
+    text: 'Get the project file in my Payhip store. Payment and download are handled there.',
+  },
+  {
+    title: 'Learn',
+    text: 'Open the session, solo the parts and use what you learn in your own productions.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What is a remake project file?',
+    a: 'A remake is a well-known track rebuilt from scratch, as close to the original as possible. The project file is the full session of that remake, with every part laid out in the arrangement so you can see how the track is put together.',
+  },
+  {
+    q: 'Where can I download the project files?',
+    a: 'All project files are sold and delivered through my Payhip store at payhip.com/ozee. Payhip handles the payment and the download.',
+  },
+  {
+    q: 'Can I hear a remake before I buy it?',
+    a: 'Yes. I post the remakes on my YouTube channel, so you can listen first and then decide which project file you want.',
+  },
+  {
+    q: 'Who are the project files for?',
+    a: 'For producers who want to learn progressive house and EDM production from finished tracks: beginners who want to understand arrangement and song structure, and experienced producers who want to compare sound design and mixing decisions.',
+  },
+  {
+    q: 'I have a question about a project file. How do I reach you?',
+    a: 'Message me on Instagram or send me an email. Both are listed on the contact page.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Progressive House Remake Project Files by Ozee',
+    url: new URL(Astro.url.pathname, Astro.site).toString(),
+    about: 'Remake project files of progressive house tracks for music producers',
+    author: { '@type': 'Person', name: 'Ozee' },
+    relatedLink: [PAYHIP_URL, YOUTUBE_URL],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title="Progressive House Remake Project Files"
+  description="Progressive house remake project files by Ozee. Open the full session of well-known tracks, study arrangement, sound design and mixdown, and download them on Payhip."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
+    <h1 class="mb-8">
+      <span class="reveal eyebrow mb-5">Progressive House Remake</span>
+      <span class="reveal block font-display text-5xl md:text-8xl">Project Files</span>
+    </h1>
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <p class="reveal max-w-2xl text-lg leading-relaxed text-paper/80">
+        I remake well-known progressive house tracks from scratch and share the project files, so
+        you can open the full session and see exactly how the drops, chords, leads and mixdown come
+        together. Watch the remakes on YouTube, then download the project files in my Payhip store.
+      </p>
+      <div class="reveal flex flex-wrap gap-x-7 gap-y-4 pl-1.5">
+        <a href={PAYHIP_URL} target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Shop on Payhip
+        </a>
+        <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" class="btn-outline">
+          Watch on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arrangement view (decorative) -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32" aria-hidden="true">
+    <div class="reveal border border-line bg-ink-soft p-4 md:p-6">
+      <div class="mb-3 flex items-center justify-between">
+        <span class="meta text-paper/50">Remake session</span>
+        <span class="meta text-brand">128 BPM</span>
+      </div>
+      <div class="grid grid-cols-[3.75rem_1fr] md:grid-cols-[6rem_1fr]">
+        <div>
+          <span class="block h-8 border-b border-line"></span>
+          {
+            lanes.map((lane) => (
+              <span class="meta flex h-9 items-center border-b border-line text-paper/60 max-md:text-[0.6rem] max-md:tracking-[0.06em] md:h-11">
+                {lane.name}
+              </span>
+            ))
+          }
+        </div>
+        <div class="relative overflow-hidden">
+          <div class="flex h-8 border-b border-line">
+            {
+              sections.map((section) => (
+                <span
+                  class="meta block truncate border-l border-line pl-1 leading-8 text-paper/45 max-md:text-[0.6rem] max-md:tracking-[0.04em] md:pl-2"
+                  style={`width:${section.width}%`}
+                >
+                  {section.name}
+                </span>
+              ))
+            }
+          </div>
+          {
+            lanes.map((lane) => (
+              <div class="relative h-9 border-b border-line md:h-11">
+                {lane.clips.map(([start, length]) => (
+                  <span
+                    class:list={[
+                      'absolute inset-y-1.5 border-l-2',
+                      lane.accent ? 'border-brand bg-brand/80' : 'border-paper/60 bg-paper/15',
+                    ]}
+                    style={`left:${start}%;width:calc(${length}% - 3px)`}
+                  />
+                ))}
+              </div>
+            ))
+          }
+          <span class="playhead absolute inset-y-0 w-0.5 bg-brand"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's inside -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+    <div class="grid gap-10 md:grid-cols-[4fr_7fr] md:gap-20">
+      <div>
+        <p class="reveal eyebrow mb-5">Inside the session</p>
+        <h2 class="reveal font-display text-3xl lg:text-5xl">
+          See how a progressive house track is built
+        </h2>
+      </div>
+      <ol class="border-t border-line">
+        {
+          inside.map((item, i) => (
+            <li class="reveal grid grid-cols-[2.5rem_1fr] gap-4 border-b border-line py-6">
+              <span class="meta pt-1 text-brand">0{i + 1}</span>
+              <div>
+                <h3 class="mb-2 text-lg font-bold uppercase [font-stretch:112%]">{item.title}</h3>
+                <p class="leading-relaxed text-paper/75">{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="border-y border-line">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+      <p class="reveal eyebrow mb-5">How it works</p>
+      <h2 class="reveal font-display text-3xl md:text-5xl mb-12">Watch. Download. Learn.</h2>
+      <ol class="grid gap-10 md:grid-cols-3 md:gap-8">
+        {
+          steps.map((step, i) => (
+            <li class="reveal">
+              <p class="font-display text-outline text-7xl mb-4">0{i + 1}</p>
+              <h3 class="mb-3 text-xl font-bold uppercase [font-stretch:112%]">{step.title}</h3>
+              <p class="leading-relaxed text-paper/75">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Why remakes -->
+  <section class="mx-auto max-w-6xl px-6 py-24 md:py-32">
+    <div class="grid gap-10 md:grid-cols-[4fr_7fr] md:gap-20">
+      <div>
+        <p class="reveal eyebrow mb-5">Why remakes</p>
+        <h2 class="reveal font-display text-3xl md:text-5xl">Learn from a finished track</h2>
+      </div>
+      <div class="reveal space-y-6 text-lg leading-relaxed text-paper/80">
+        <p>
+          Tutorials usually show one technique at a time. A remake shows how all of them work
+          together in a finished, release-ready progressive house track: how the kick and bass
+          share the low end, how the chords open up in the breakdown, how the build-up creates
+          tension and why the drop hits as hard as it does.
+        </p>
+        <p>
+          I&rsquo;ve been producing melodic progressive house since 2018, with releases on labels
+          like Revealed Recordings, Generation Smash and Stardust Records. The project files are
+          where I share that workflow with other producers who want to learn EDM production from
+          real tracks.
+        </p>
+        <p>
+          <a href="/releases/" class="link">Listen to my own releases</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+    <div class="grid gap-10 md:grid-cols-[4fr_7fr] md:gap-20">
+      <div>
+        <p class="reveal eyebrow mb-5">FAQ</p>
+        <h2 class="reveal font-display text-3xl md:text-5xl">Questions</h2>
+      </div>
+      <div class="border-t border-line">
+        {
+          faqs.map((faq) => (
+            <details class="faq reveal group border-b border-line">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-bold uppercase [font-stretch:112%] transition-colors hover:text-brand">
+                {faq.q}
+                <span class="faq-icon relative h-4 w-4 shrink-0" aria-hidden="true" />
+              </summary>
+              <p class="pb-6 pr-10 leading-relaxed text-paper/75">
+                {faq.q.startsWith('I have a question') ? (
+                  <>
+                    Message me on Instagram or send me an email. Both are listed on the{' '}
+                    <a href="/contact/" class="link">contact page</a>.
+                  </>
+                ) : (
+                  faq.a
+                )}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="mx-auto max-w-6xl px-6 pb-8">
+    <a
+      href={PAYHIP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="reveal group flex flex-col gap-6 bg-brand p-8 text-ink md:flex-row md:items-center md:justify-between md:p-14"
+    >
+      <span>
+        <span class="meta mb-3 block opacity-70">payhip.com/ozee</span>
+        <span class="block font-display text-3xl md:text-6xl">Browse all project files</span>
+      </span>
+      <span class="arrow arrow-out text-4xl md:text-6xl"></span>
+    </a>
+  </section>
+</Layout>
+
+<style>
+  .playhead {
+    animation: playhead 12s linear infinite;
+  }
+
+  @keyframes playhead {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    margin-top: -1px;
+    background: currentColor;
+    transition: transform 0.25s ease;
+  }
+
+  .faq-icon::after {
+    transform: rotate(90deg);
+  }
+
+  .faq[open] .faq-icon::after {
+    transform: rotate(0deg);
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

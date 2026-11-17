@@ -5,6 +5,7 @@ import { SPOTIFY_URL } from '../data/socials';
 const navItems = [
   { href: '/', label: 'Home' },
   { href: '/releases/', label: 'Releases' },
+  { href: '/project-files/', label: 'Project Files' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -20,7 +21,7 @@ const isActive = (href: string) =>
       <img src="/images/logo.png" alt="Ozee logo" width="1600" height="448" class="h-6 w-auto" />
     </a>
 
-    <nav aria-label="Primary" class="hidden md:flex items-center gap-9">
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-5 lg:gap-9">
       {
         navItems.map((item) => (
           <a
@@ -41,7 +42,7 @@ const isActive = (href: string) =>
       href={SPOTIFY_URL}
       target="_blank"
       rel="noopener noreferrer"
-      class="btn-primary hidden md:inline-flex px-5 py-3 text-xs"
+      class="btn-primary hidden lg:inline-flex px-5 py-3 text-xs"
     >
       Listen on Spotify
     </a>
