@@ -3,6 +3,23 @@ import Layout from '../layouts/Layout.astro';
 import { PAYHIP_URL, YOUTUBE_URL } from '../data/socials';
 import { projectFiles } from '../data/project-files';
 
+// Decorative arrangement view: each clip is [start %, length %] on a 0–100 timeline.
+const sections = [
+  { name: 'Intro', width: 18 },
+  { name: 'Build', width: 18 },
+  { name: 'Drop', width: 24 },
+  { name: 'Break', width: 16 },
+  { name: 'Drop', width: 24 },
+];
+const lanes = [
+  { name: 'Drums', clips: [[0, 36], [36, 24], [76, 24]], accent: false },
+  { name: 'Bass', clips: [[18, 18], [36, 24], [76, 24]], accent: false },
+  { name: 'Chords', clips: [[0, 18], [36, 24], [60, 40]], accent: false },
+  { name: 'Lead', clips: [[36, 24], [76, 24]], accent: true },
+  { name: 'Vocals', clips: [[8, 22], [60, 16]], accent: false },
+  { name: 'FX', clips: [[30, 6], [56, 4], [70, 6]], accent: false },
+];
+
 const inside = [
   {
     title: 'Complete FL Studio project',
@@ -130,7 +147,7 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="mx-auto max-w-6xl px-6 pt-40 pb-24 md:pb-32">
+  <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
     <p class="reveal eyebrow mb-5">Free &amp; Original FLPs</p>
     <h1 class="reveal font-display text-5xl md:text-8xl mb-8">Project Files</h1>
     <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
@@ -157,8 +174,77 @@ const jsonLd = [
     </div>
   </section>
 
+  <!-- Arrangement view (decorative) -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32" aria-hidden="true">
+    <div class="reveal border border-line bg-ink-soft p-4 md:p-6">
+      <div class="mb-3 flex items-center justify-between">
+        <span class="meta text-paper/50">FL Studio project</span>
+        <span class="meta text-brand">128 BPM</span>
+      </div>
+      <div class="grid grid-cols-[3.75rem_1fr] md:grid-cols-[6rem_1fr]">
+        <div>
+          <span class="block h-8 border-b border-line"></span>
+          {
+            lanes.map((lane) => (
+              <span class="meta flex h-9 items-center border-b border-line text-paper/60 max-md:text-[0.6rem] max-md:tracking-[0.06em] md:h-11">
+                {lane.name}
+              </span>
+            ))
+          }
+        </div>
+        <div class="relative overflow-hidden">
+          <div class="flex h-8 border-b border-line">
+            {
+              sections.map((section) => (
+                <span
+                  class="meta block truncate border-l border-line pl-1 leading-8 text-paper/45 max-md:text-[0.6rem] max-md:tracking-[0.04em] md:pl-2"
+                  style={`width:${section.width}%`}
+                >
+                  {section.name}
+                </span>
+              ))
+            }
+          </div>
+          {
+            lanes.map((lane) => (
+              <div class="relative h-9 border-b border-line md:h-11">
+                {lane.clips.map(([start, length]) => (
+                  <span
+                    class:list={[
+                      'absolute inset-y-1.5 border-l-2',
+                      lane.accent ? 'border-brand bg-brand/80' : 'border-paper/60 bg-paper/15',
+                    ]}
+                    style={`left:${start}%;width:calc(${length}% - 3px)`}
+                  />
+                ))}
+              </div>
+            ))
+          }
+          <span class="playhead absolute inset-y-0 w-0.5 bg-brand"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scroll cue: visible on arrival, hides once the visitor scrolls -->
+  <div
+    id="scroll-cue"
+    class="scroll-cue pointer-events-none fixed inset-x-0 bottom-0 z-20 flex justify-center bg-gradient-to-t from-ink from-45% via-ink/90 to-transparent pt-24 pb-6"
+  >
+    <a
+      href="#flps"
+      aria-label="Scroll down to the project files"
+      class="group pointer-events-auto flex flex-col items-center gap-2 text-paper/80 transition-colors hover:text-brand"
+    >
+      <span class="meta">Scroll to the FLPs</span>
+      <span class="scroll-cue-box flex h-11 w-11 items-center justify-center border border-paper/40 bg-ink transition-colors group-hover:border-brand">
+        <span class="arrow rotate-90 text-lg"></span>
+      </span>
+    </a>
+  </div>
+
   <!-- Available project files -->
-  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
+  <section id="flps" class="mx-auto max-w-6xl scroll-mt-24 px-6 pb-24 md:pb-32">
     <div class="reveal mb-8 flex items-end justify-between gap-6">
       <div>
         <p class="eyebrow mb-4">In the store</p>
@@ -359,6 +445,47 @@ const jsonLd = [
 </Layout>
 
 <style>
+  .playhead {
+    animation: playhead 12s linear infinite;
+  }
+
+  @keyframes playhead {
+    from {
+      left: 0%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+
+  .scroll-cue {
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0s;
+  }
+
+  .scroll-cue[data-hidden] {
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s linear 0.3s;
+  }
+
+  .scroll-cue-box {
+    animation: scroll-cue-bounce 1.6s ease-in-out infinite;
+  }
+
+  @keyframes scroll-cue-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
   .faq-icon::before,
   .faq-icon::after {
     content: '';
@@ -384,3 +511,10 @@ const jsonLd = [
     display: none;
   }
 </style>
+
+<script>
+  const cue = document.getElementById('scroll-cue');
+  const updateCue = () => cue?.toggleAttribute('data-hidden', window.scrollY > 80);
+  updateCue();
+  window.addEventListener('scroll', updateCue, { passive: true });
+</script>
