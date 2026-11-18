@@ -130,7 +130,14 @@ const ldEntries = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
         // A margin instead of a ratio, so blocks taller than the viewport still reveal.
         { rootMargin: '0px 0px -8% 0px' }
       );
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      // Anything already on screen at load is shown right away; the rest reveals on scroll.
+      document.querySelectorAll('.reveal').forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('is-visible');
+        } else {
+          observer.observe(el);
+        }
+      });
     </script>
   </body>
 </html>

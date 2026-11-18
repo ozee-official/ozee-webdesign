@@ -34,8 +34,8 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="relative flex flex-col overflow-hidden md:min-h-[100svh] md:flex-row md:items-end">
-    <div class="hero-photo h-[64svh] md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[58%]">
+  <section class="relative flex min-h-[100svh] flex-col overflow-hidden pt-16 md:flex-row md:items-end md:pt-0">
+    <div class="hero-photo relative min-h-48 flex-1 md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[58%]">
       <img
         src="/images/press/hero-portrait.jpg"
         alt="Portrait of Ozee, progressive house and festival EDM producer from Germany"
@@ -43,15 +43,15 @@ const jsonLd = {
         height="1076"
         loading="eager"
         fetchpriority="high"
-        class="h-full w-full object-cover object-top"
+        class="absolute inset-0 h-full w-full object-cover object-top"
       />
     </div>
 
-    <div class="relative mx-auto -mt-24 w-full max-w-6xl px-6 pb-14 md:mt-0 md:pt-40 md:pb-20">
+    <div class="relative mx-auto -mt-24 w-full max-w-6xl px-6 pb-8 md:mt-0 md:pt-40 md:pb-20">
       <h1 class="reveal font-display text-[clamp(5rem,21vw,15rem)] leading-[0.8] -ml-[0.04em]">
         OZEE
       </h1>
-      <div class="mt-8 flex flex-col gap-8 md:mt-12 lg:flex-row lg:items-end lg:justify-between">
+      <div class="mt-6 flex flex-col gap-6 md:mt-12 md:gap-8 lg:flex-row lg:items-end lg:justify-between">
         <p class="reveal max-w-md text-lg text-paper/80 text-balance">
           I&rsquo;m a German music producer crafting melodic progressive house music. Since 2018,
           I&rsquo;ve been shaping my sound with emotional melodies, powerful energy, and a passion
