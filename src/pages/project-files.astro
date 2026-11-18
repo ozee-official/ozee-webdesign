@@ -147,9 +147,9 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <!-- First screen: always at least one viewport tall, so the list starts below the fold -->
-  <div class="min-h-[100svh]">
+  <div class="md:min-h-[100svh]">
   <!-- Hero -->
-  <section class="mx-auto max-w-6xl px-6 pt-40 pb-16">
+  <section class="mx-auto max-w-6xl px-6 pt-24 pb-16 md:pt-40">
     <p class="reveal eyebrow mb-5">Free &amp; Original FLPs</p>
     <h1 class="reveal font-display text-5xl md:text-8xl mb-8">Project Files</h1>
     <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
@@ -172,7 +172,7 @@ const jsonLd = [
   </section>
 
   <!-- Arrangement view (decorative) -->
-  <section class="mx-auto max-w-6xl px-6 pb-24 md:pb-32" aria-hidden="true">
+  <section class="mx-auto hidden max-w-6xl px-6 pb-24 md:block md:pb-32" aria-hidden="true">
     <div class="reveal border border-line bg-ink-soft p-4 md:p-6">
       <div class="mb-3 flex items-center justify-between">
         <span class="meta text-paper/50">FL Studio project</span>
@@ -227,7 +227,7 @@ const jsonLd = [
   <!-- Scroll cue: visible on arrival, hides once the visitor scrolls -->
   <div
     id="scroll-cue"
-    class="scroll-cue pointer-events-none fixed inset-x-0 bottom-0 z-20 flex justify-center bg-gradient-to-t from-ink from-45% via-ink/90 to-transparent pt-24 pb-6"
+    class="scroll-cue pointer-events-none fixed inset-x-0 bottom-0 z-20 hidden justify-center bg-gradient-to-t from-ink from-45% via-ink/90 to-transparent pt-24 pb-6 md:flex"
   >
     <a
       href="#flps"
