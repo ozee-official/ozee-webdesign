@@ -5,7 +5,7 @@
   id="back-to-top"
   type="button"
   aria-label="Back to top"
-  class="back-to-top fixed right-4 bottom-5 z-30 flex h-12 w-12 items-center justify-center bg-brand text-ink md:hidden"
+  class="back-to-top fixed right-4 bottom-5 z-30 flex h-12 w-12 items-center justify-center bg-brand text-ink md:hidden xl:right-6 xl:bottom-6 xl:flex xl:h-11 xl:w-11"
 >
   <span class="arrow -rotate-90 text-lg"></span>
 </button>
@@ -27,27 +27,57 @@
     transform: translateY(0);
     transition-delay: 0s;
   }
+
+  /* Desktop: pops up in the free margin right of the content column. The thin
+     black ring keeps it readable if it ever passes over a yellow element. */
+  @media (min-width: 1280px) {
+    .back-to-top {
+      transform: translateY(8px) scale(0.5);
+      box-shadow: 0 0 0 2px #000;
+      transition:
+        opacity 0.2s ease,
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background-color 0.2s ease,
+        visibility 0s linear 0.4s;
+    }
+
+    .back-to-top[data-visible] {
+      transform: translateY(0) scale(1);
+    }
+
+    .back-to-top[data-visible]:hover {
+      background-color: var(--color-paper);
+      transform: translateY(-3px) scale(1);
+    }
+  }
 </style>
 
 <script>
-  // Shown only while scrolling back up, once the reader is well down the page.
   const button = document.getElementById('back-to-top');
-  const MIN_DEPTH = 600;
+  const desktop = window.matchMedia('(min-width: 1280px)');
+  const DESKTOP_DEPTH = 400;
+  const MOBILE_DEPTH = 600;
   const JITTER = 6;
   let lastY = window.scrollY;
 
-  window.addEventListener(
-    'scroll',
-    () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastY) < JITTER) return;
-      button?.toggleAttribute('data-visible', y < lastY && y > MIN_DEPTH);
-      lastY = y;
-    },
-    { passive: true }
-  );
+  const update = () => {
+    const y = window.scrollY;
+    if (desktop.matches) {
+      // Desktop: appears as soon as the visitor has scrolled a bit.
+      button?.toggleAttribute('data-visible', y > DESKTOP_DEPTH);
+    } else if (Math.abs(y - lastY) >= JITTER) {
+      // Phones: only while scrolling back up from further down the page.
+      button?.toggleAttribute('data-visible', y < lastY && y > MOBILE_DEPTH);
+    }
+    lastY = y;
+  };
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  desktop.addEventListener('change', () => button?.removeAttribute('data-visible'));
 
   button?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
   });
 </script>
